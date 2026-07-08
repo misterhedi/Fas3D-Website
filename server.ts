@@ -6,6 +6,7 @@ import fs from "fs";
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { GoogleGenAI } from "@google/genai";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -487,6 +488,130 @@ async function startServer() {
       });
     } catch (err: any) {
       res.status(500).json({ success: false, message: "Gagal memproses data kepatuhan ISO." });
+    }
+  });
+
+  // ==================== LIVE CHAT ASSISTANT ENDPOINT (GEMINI & FALLBACK) ====================
+  let aiClient: GoogleGenAI | null = null;
+  function getGeminiClient() {
+    if (!process.env.GEMINI_API_KEY) {
+      return null;
+    }
+    if (!aiClient) {
+      aiClient = new GoogleGenAI({
+        apiKey: process.env.GEMINI_API_KEY,
+        httpOptions: {
+          headers: {
+            'User-Agent': 'aistudio-build',
+          }
+        }
+      });
+    }
+    return aiClient;
+  }
+
+  app.post("/api/chat", async (req: any, res: any) => {
+    try {
+      const { message } = req.body;
+      if (!message || typeof message !== "string") {
+        return res.status(400).json({ success: false, message: "Pesan tidak boleh kosong." });
+      }
+
+      const client = getGeminiClient();
+      if (client) {
+        try {
+          const products = readJsonFile<Product[]>(DB_PRODUCTS, []);
+          const productsSummary = products.map(p => `- ${p.name} (${p.category}): Rp ${p.price.toLocaleString("id-ID")}${p.billingPeriod === "monthly" ? "/bulan" : p.billingPeriod === "yearly" ? "/tahun" : p.billingPeriod === "per-session" ? "/sesi" : ""}`).join("\n");
+          
+          const systemInstruction = `Anda adalah AI Sales & Technical Support Representative virtual untuk PT FAS Technology Solutions (FAS Tech).
+Anda berbicara secara ramah, profesional, sopan, membantu, dan sepenuhnya dalam Bahasa Indonesia.
+PT FAS Technology Solutions adalah perusahaan IT berbadan hukum resmi dengan keputusan Kemenkumham RI No. AHU-0028491.AH.01.01 dan bersertifikasi ISO/IEC 27001:2013 (Standar Keamanan Informasi) untuk perlindungan data kependudukan desa.
+Lokasi Head Office kami: KP. Sukahujan Mesjid RT.007 RW.003, Rahong, Malingping, Kab. Lebak, Banten. Kantor operasional lain di Kawasan Digital FAS, Slipi, Jakarta Barat, Banten/DKI Jakarta.
+
+Daftar Produk Resmi Kami (${products.length} produk):\n${productsSummary}\n
+
+Instruksi Tambahan:
+- Berikan respon yang singkat, informatif, dan mengundang interaksi. Maksimal 3-4 kalimat kecuali sedang mendaftar fitur.
+- Tawarkan solusi sesuai kategori produk: PRODUK WEBSITE, SOFTWARE, SUBSCRIPTION, JASA, PRODUK DIGITAL, HOSTING & DOMAIN.
+- Jika ditanya tentang cara membeli, sarankan mereka untuk login dan mengklik 'Beli Sekarang' atau 'Hubungi Sales' di WhatsApp kami (+62 812-3456-7890).
+- Jika ditanya tentang komisi atau program reseller, jelaskan bahwa komisi mendaftar reseller sangat menarik hingga Rp 1.500.000 per transaksi penjualan, dan mereka bisa registrasi di pojok kanan atas.`;
+
+          const response = await client.models.generateContent({
+            model: "gemini-3.5-flash",
+            contents: message,
+            config: {
+              systemInstruction: systemInstruction,
+              temperature: 0.7,
+            }
+          });
+
+          if (response && response.text) {
+            return res.json({ success: true, reply: response.text.trim() });
+          }
+        } catch (apiErr) {
+          console.error("Gemini API call failed, using smart fallback:", apiErr);
+        }
+      }
+
+      // SMART FALLBACK RULES ENGINE (INDONESIAN)
+      const msg = message.toLowerCase();
+      let reply = "";
+
+      if (msg.includes("harga") || msg.includes("paket") || msg.includes("biaya") || msg.includes("price") || msg.includes("tarif") || msg.includes("katalog") || msg.includes("produk")) {
+        reply = "Halo! PT FAS Technology Solutions menawarkan berbagai solusi digital dengan harga transparan. Beberapa produk terpopuler kami meliputi:\n" +
+                "1. **Template Website Desa SID**: Rp 15.000.000 (Sistem portal informasi publik desa)\n" +
+                "2. **Sistem Informasi Desa (SID) Core**: Rp 25.000.000 (Administrasi kependudukan lengkap)\n" +
+                "3. **Aplikasi Absensi Online**: Rp 15.000.000 (Absensi perangkat desa berbasis lokasi)\n" +
+                "4. **Cloud POS Pro**: Rp 500.000 / bulan (Kasir online modern)\n" +
+                "5. **Konsultasi Digitalisasi Desa**: Rp 2.000.000 / sesi\n\n" +
+                "Anda dapat menelusuri seluruh 43 produk kami secara lengkap di **E-Katalog** dengan mengklik tombol katalog di menu navigasi atas atau tombol pintasan chat!";
+      } else if (msg.includes("alamat") || msg.includes("lokasi") || msg.includes("head office") || msg.includes("kantor") || msg.includes("di mana") || msg.includes("tempat")) {
+        reply = "Kantor Pusat (Head Office) PT FAS Technology Solutions beralamat resmi di:\n" +
+                "📍 **KP. Sukahujan Mesjid RT.007 RW.003, Rahong, Malingping, Kab. Lebak, Banten**.\n\n" +
+                "Kami juga memiliki kantor perwakilan di **Kawasan Digital FAS, Slipi, Jakarta Barat, DKI Jakarta**. Kami melayani operasional dari hari Senin s/d Jumat pukul 08:00 - 17:00 WIB. Silakan datang berkunjung!";
+      } else if (msg.includes("kontak") || msg.includes("whatsapp") || msg.includes("telepon") || msg.includes("email") || msg.includes("hubungi") || msg.includes("nomor")) {
+        reply = "Tentu! Anda dapat menghubungi tim sales dan support kami melalui saluran resmi berikut:\n" +
+                "📞 **Telepon/WhatsApp**: +62 812-3456-7890 (Customer Service PT FAS)\n" +
+                "✉️ **Email**: info@fas-tech-solutions.com\n\n" +
+                "Silakan chat WhatsApp kami untuk respon lebih cepat mengenai kebutuhan teknologi desa Anda!";
+      } else if (msg.includes("legalitas") || msg.includes("ijin") || msg.includes("izin") || msg.includes("resmi") || msg.includes("hukum") || msg.includes("kemenkumham") || msg.includes("sk") || msg.includes("pt")) {
+        reply = "PT FAS Technology Solutions adalah badan hukum resmi yang sah dan terdaftar di Kementerian Hukum dan HAM Republik Indonesia berdasarkan SK Menkumham RI No. **AHU-0028491.AH.01.01**. Kami juga mengantongi NIB (1249018402912) dan terdaftar sebagai Penyelenggara Sistem Elektronik (PSE) di Kemkominfo RI. Jadi, kerja sama dengan kami dijamin aman dan akuntabel.";
+      } else if (msg.includes("keamanan") || msg.includes("iso") || msg.includes("sertifikasi") || msg.includes("aman") || msg.includes("data")) {
+        reply = "Kami berkomitmen penuh terhadap keamanan informasi. PT FAS Technology Solutions telah meraih sertifikasi **ISO/IEC 27001:2013** untuk Sistem Manajemen Keamanan Informasi. Seluruh data kependudukan desa yang dikelola dalam Sistem Informasi Desa (SID) kami dienkripsi menggunakan standar keamanan tinggi (AES-256-GCM) di FAS Cloud Server yang handal.";
+      } else if (msg.includes("sid") || msg.includes("desa") || msg.includes("desa digital") || msg.includes("pemerintah")) {
+        reply = "Kami adalah pelopor Digitalisasi Desa di Indonesia! Ekosistem desa digital kami meliputi:\n" +
+                "- **Sistem Informasi Desa (SID) Core**: Mengelola surat menyurat, kependudukan, statistik, dan APBDes secara otomatis (Rp 25.000.000 sekali bayar).\n" +
+                "- **Template Website Desa SID**: Portal berita, transparansi anggaran, dan lapak UMKM desa (Rp 15.000.000).\n" +
+                "- **Pelatihan Operator Desa**: Bimtek intensif sertifikasi perangkat desa (Rp 5.000.000 / paket).\n\n" +
+                "Sistem kami sudah teruji memangkas waktu pelayanan warga dari harian menjadi hanya hitungan menit!";
+      } else if (msg.includes("reseller") || msg.includes("mitra") || msg.includes("komisi") || msg.includes("gabung")) {
+        reply = "Ayo bergabung menjadi Mitra Reseller PT FAS! Dapatkan komisi hingga **Rp 1.500.000** per transaksi penjualan sistem desa digital ke instansi terdekat Anda. Kami menyediakan dashboard khusus untuk melacak klien, mengajukan penarikan komisi (withdraw) real-time, dan materi pemasaran lengkap. Daftarkan diri Anda di menu **'Registrasi Reseller'** di sudut kanan atas website!";
+      } else if (msg.includes("jasa") || msg.includes("maintenance") || msg.includes("desain") || msg.includes("seo") || msg.includes("custom")) {
+        reply = "Selain produk software siap pakai, kami melayani jasa profesional khusus IT:\n" +
+                "- **Jasa Desain UI/UX Proyek**: Rp 4.000.000\n" +
+                "- **Jasa Maintenance Website**: Rp 1.000.000 / bulan\n" +
+                "- **Jasa SEO Optimasi Google**: Rp 3.000.000 / bulan\n" +
+                "- **Jasa Audit & Keamanan Siber**: Rp 5.000.000 / proyek\n\n" +
+                "Silakan diskusikan kebutuhan custom sistem instansi Anda dengan mengklik menu kontak kami!";
+      } else if (msg.includes("halo") || msg.includes("hai") || msg.includes("pagi") || msg.includes("siang") || msg.includes("sore") || msg.includes("malam") || msg.includes("test") || msg.includes("assalamualaikum") || msg.includes("oi") || msg.includes("bro")) {
+        reply = "Halo! Selamat datang di Layanan Pelanggan PT FAS Technology Solutions. Saya asisten virtual AI Anda. Ada yang bisa saya bantu hari ini?\n\n" +
+                "Anda dapat menanyakan informasi tentang:\n" +
+                "1. 📂 **Produk & Harga** (Ketik: *produk* / *harga*)\n" +
+                "2. 📍 **Lokasi Kantor & Kontak** (Ketik: *alamat* / *kontak*)\n" +
+                "3. 📄 **Legalitas & Keamanan ISO 27001** (Ketik: *legalitas* / *ISO*)\n" +
+                "4. 👥 **Program Reseller** (Ketik: *reseller*)";
+      } else {
+        reply = "Terima kasih atas pesan Anda! Saya asisten virtual PT FAS Technology Solutions. Untuk membantu Anda lebih cepat, silakan pilih topik di bawah ini:\n\n" +
+                "- 📂 **Produk & Harga**: Ketik *'harga'* untuk daftar produk terpopuler.\n" +
+                "- 📍 **Lokasi Kantor**: Ketik *'alamat'* untuk detail kantor kami.\n" +
+                "- 📞 **Hubungi Tim Sales**: Ketik *'kontak'* untuk langsung mendapatkan nomor WhatsApp resmi kami (+62 812-3456-7890).\n" +
+                "- 📄 **Keamanan Data**: Ketik *'keamanan'* atau *'ISO'* untuk informasi sertifikasi ISO 27001 kami.";
+      }
+
+      res.json({ success: true, reply });
+    } catch (err) {
+      console.error("Chat API error:", err);
+      res.status(500).json({ success: false, message: "Terjadi kesalahan sistem dalam memproses chat." });
     }
   });
 

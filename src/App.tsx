@@ -43,6 +43,9 @@ import { ServicePackage } from "./types";
 import TestimonialSlider from "./components/TestimonialSlider";
 import WishlistModal from "./components/WishlistModal";
 import CatalogModal from "./components/CatalogModal";
+import AboutModal from "./components/AboutModal";
+import LiveChatWidget from "./components/LiveChatWidget";
+import FAQSection from "./components/FAQSection";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -60,8 +63,22 @@ export default function App() {
   const [wishlistIds, setWishlistIds] = useState<string[]>([]);
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [authToken, setAuthToken] = useState<string | null>(null);
   const [authUser, setAuthUser] = useState<any | null>(null);
+
+  // Core products mobile carousel state
+  const productContainerRef = useRef<HTMLDivElement>(null);
+  const [activeProductIndex, setActiveProductIndex] = useState(0);
+
+  const handleProductScroll = () => {
+    if (!productContainerRef.current) return;
+    const { scrollLeft, clientWidth } = productContainerRef.current;
+    if (clientWidth === 0) return;
+    // Compute current active card index (0 to 3) based on scroll offset
+    const index = Math.round(scrollLeft / (clientWidth * 0.8));
+    setActiveProductIndex(Math.max(0, Math.min(3, index)));
+  };
 
   // Load session & fetch backend wishlist if authenticated, or fallback to local storage on mount
   useEffect(() => {
@@ -510,11 +527,17 @@ export default function App() {
           {/* Desktop Nav */}
           <nav className="hidden md:flex gap-1 items-center">
             <a href="#hero" className="text-xs font-semibold uppercase tracking-wider px-3 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all">Beranda</a>
-            <a href="#about" className="text-xs font-semibold uppercase tracking-wider px-3 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all">Profil</a>
+            <button
+              onClick={() => setIsAboutOpen(true)}
+              className="text-xs font-semibold uppercase tracking-wider px-3 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all text-left"
+            >
+              Tentang
+            </button>
             <a href="#products" className="text-xs font-semibold uppercase tracking-wider px-3 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all">Produk</a>
             <a href="#testimonials" className="text-xs font-semibold uppercase tracking-wider px-3 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all">Testimoni</a>
             <a href="#pricing" className="text-xs font-semibold uppercase tracking-wider px-3 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all">Paket</a>
             <a href="#legal" className="text-xs font-semibold uppercase tracking-wider px-3 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all">Legalitas</a>
+            <a href="#faq" className="text-xs font-semibold uppercase tracking-wider px-3 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all">FAQ</a>
             <a href="#contact" className="text-xs font-semibold uppercase tracking-wider px-3 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all">Kontak</a>
             
             <div className="w-[1px] h-6 bg-white/10 mx-2"></div>
@@ -563,11 +586,20 @@ export default function App() {
           <div className="fixed top-22 left-4 w-[calc(100%-32px)] bg-[rgba(5,11,20,0.95)] border border-white/10 rounded-2xl p-4 z-[99] shadow-2xl backdrop-blur-2xl pointer-events-auto md:hidden space-y-3">
             <nav className="flex flex-col gap-1">
               <a href="#hero" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold uppercase tracking-wider py-2.5 px-4 text-gray-200 hover:bg-white/5 rounded-xl block">Beranda</a>
-              <a href="#about" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold uppercase tracking-wider py-2.5 px-4 text-gray-200 hover:bg-white/5 rounded-xl block">Profil</a>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setIsAboutOpen(true);
+                }}
+                className="text-sm font-semibold uppercase tracking-wider py-2.5 px-4 text-gray-200 hover:bg-white/5 rounded-xl block text-left w-full"
+              >
+                Tentang
+              </button>
               <a href="#products" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold uppercase tracking-wider py-2.5 px-4 text-gray-200 hover:bg-white/5 rounded-xl block">Produk</a>
               <a href="#testimonials" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold uppercase tracking-wider py-2.5 px-4 text-gray-200 hover:bg-white/5 rounded-xl block">Testimoni</a>
               <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold uppercase tracking-wider py-2.5 px-4 text-gray-200 hover:bg-white/5 rounded-xl block">Paket</a>
               <a href="#legal" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold uppercase tracking-wider py-2.5 px-4 text-gray-200 hover:bg-white/5 rounded-xl block">Legalitas</a>
+              <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold uppercase tracking-wider py-2.5 px-4 text-gray-200 hover:bg-white/5 rounded-xl block">FAQ</a>
               <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold uppercase tracking-wider py-2.5 px-4 text-gray-200 hover:bg-white/5 rounded-xl block">Kontak</a>
             </nav>
             <div className="border-t border-white/5 pt-3 flex flex-col gap-2">
@@ -703,6 +735,18 @@ export default function App() {
               </div>
 
             </div>
+
+            {/* Selengkapnya Tentang Kami Button */}
+            <div className="mt-12 text-center">
+              <button
+                onClick={() => setIsAboutOpen(true)}
+                className="inline-flex items-center gap-2.5 bg-[#c9a84c]/10 hover:bg-[#c9a84c] border border-[#c9a84c]/20 hover:border-transparent text-[#c9a84c] hover:text-slate-900 font-extrabold uppercase text-[11px] tracking-widest px-8 py-4 rounded-2xl transition-all duration-300 shadow-lg shadow-yellow-950/10 hover:shadow-yellow-950/20 transform hover:-translate-y-0.5 active:translate-y-0"
+              >
+                <Sparkles size={14} />
+                <span>Selengkapnya Tentang FAS Technology</span>
+              </button>
+            </div>
+
           </div>
         </section>
 
@@ -721,8 +765,12 @@ export default function App() {
               </p>
             </div>
 
-            {/* Core product cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Core product cards - responsive horizontal carousel on mobile, grid on desktop */}
+            <div
+              ref={productContainerRef}
+              onScroll={handleProductScroll}
+              className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:grid-cols-2 gap-6 pb-6 md:pb-0 scrollbar-none scroll-smooth"
+            >
               {[
                 {
                   id: "sid",
@@ -765,7 +813,7 @@ export default function App() {
                 return (
                   <div
                     key={p.id}
-                    className="group bg-[rgba(5,11,20,0.65)] border border-white/10 rounded-3xl p-6 backdrop-blur-xl relative overflow-hidden shadow-2xl flex flex-col hover:border-[#c9a84c] transition-all duration-500"
+                    className="group bg-[rgba(5,11,20,0.65)] border border-white/10 rounded-3xl p-6 backdrop-blur-xl relative overflow-hidden shadow-2xl flex flex-col hover:border-[#c9a84c] transition-all duration-500 w-[85vw] sm:w-[350px] md:w-auto shrink-0 snap-center"
                   >
                     <div className="flex justify-between items-center mb-6">
                       <div className={`w-12 h-12 rounded-xl flex justify-center items-center text-white ${p.iconColor}`}>
@@ -797,6 +845,40 @@ export default function App() {
                   </div>
                 );
               })}
+            </div>
+
+            {/* Mobile Carousel Navigation Dots & Touch Guidance */}
+            <div className="flex flex-col items-center gap-3 mt-6 md:hidden">
+              <div className="flex items-center gap-2">
+                {[0, 1, 2, 3].map((idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      if (productContainerRef.current) {
+                        const container = productContainerRef.current;
+                        const children = container.children;
+                        if (children && children[idx]) {
+                          children[idx].scrollIntoView({
+                            behavior: "smooth",
+                            block: "nearest",
+                            inline: "center"
+                          });
+                        }
+                        setActiveProductIndex(idx);
+                      }
+                    }}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      activeProductIndex === idx
+                        ? "w-6 bg-[#c9a84c]"
+                        : "w-2 bg-white/20 hover:bg-white/40"
+                    }`}
+                    aria-label={`Pindah ke slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+              <span className="text-[9px] text-gray-500 font-medium tracking-wider uppercase">
+                Geser secara horizontal untuk melihat lebih banyak
+              </span>
             </div>
 
             {/* Catalog Button Call to Action */}
@@ -997,6 +1079,9 @@ export default function App() {
           </div>
         </section>
 
+        {/* 4B. FAQ SECTION */}
+        <FAQSection />
+
         {/* 5. CONTACT SECTION */}
         <section id="contact" className="relative min-h-screen w-full flex justify-center items-center px-6 py-24">
           <div className="max-w-5xl w-full pointer-events-auto">
@@ -1161,6 +1246,12 @@ export default function App() {
       </main>
 
       {/* 6. MODAL INTERACTIVE DIALOG OVERLAYS (PORTALS) */}
+      <LiveChatWidget />
+
+      <AboutModal
+        isOpen={isAboutOpen}
+        onClose={() => setIsAboutOpen(false)}
+      />
 
       {/* catalog portal */}
       <CatalogModal
