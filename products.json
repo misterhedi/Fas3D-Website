@@ -1,0 +1,991 @@
+[
+  {
+    "id": "prod-web-01",
+    "name": "Template Website Desa SID",
+    "category": "PRODUK WEBSITE",
+    "type": "website",
+    "price": 15000000,
+    "billingPeriod": "one-time",
+    "description": "Template website resmi desa yang dirancang khusus terintegrasi dengan Sistem Informasi Desa (SID). Memudahkan publikasi berita, transparansi APBDes, dan pelayanan mandiri warga secara online.",
+    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Integrasi API SID Nasional",
+      "Widget Infografis APBDes Interaktif",
+      "Layout Responsif di Semua Perangkat",
+      "Optimasi SEO & Kecepatan Akses Tinggi",
+      "Sistem Keamanan SSL & Proteksi DDOS"
+    ],
+    "attributes": {
+      "techStack": "React.js & Tailwind CSS",
+      "setupDuration": "5-7 Hari Kerja",
+      "supportPeriod": "1 Tahun Garansi & Maintenance",
+      "licenseType": "Single Domain (desa.id)"
+    }
+  },
+  {
+    "id": "prod-web-02",
+    "name": "Landing Page Company Profile",
+    "category": "PRODUK WEBSITE",
+    "type": "website",
+    "price": 5000000,
+    "billingPeriod": "one-time",
+    "description": "Halaman pendaratan tunggal (landing page) premium untuk menampilkan profil bisnis, jasa, portofolio, dan kontak Anda dengan desain modern yang memikat calon klien.",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Desain Kustom Satu Halaman Penuh",
+      "Tombol Integrasi WhatsApp Direct",
+      "Formulir Kontak Terhubung ke Email",
+      "Animasi Halus & Interaktif (Motion)",
+      "Termasuk Setup Google Analytics & Search Console"
+    ],
+    "attributes": {
+      "techStack": "HTML5, Tailwind, & JS / Astro",
+      "setupDuration": "3-5 Hari Kerja",
+      "supportPeriod": "6 Bulan Dukungan Teknis",
+      "licenseType": "Commercial License"
+    }
+  },
+  {
+    "id": "prod-web-03",
+    "name": "Website E-commerce",
+    "category": "PRODUK WEBSITE",
+    "type": "website",
+    "price": 20000000,
+    "billingPeriod": "one-time",
+    "description": "Website toko online profesional siap pakai dengan manajemen produk lengkap, keranjang belanja, kalkulasi ongkos kirim otomatis, serta integrasi gerbang pembayaran (payment gateway).",
+    "image": "https://images.unsplash.com/photo-1557821552-17105176677c?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Gerbang Pembayaran Otomatis (Midtrans/Duitku)",
+      "Kalkulasi Ongkir Otomatis (RajaOngkir)",
+      "Manajemen Stok, Varian, & Kupon Diskon",
+      "Notifikasi Status Pembelian via WhatsApp/Email",
+      "Laporan Penjualan & Dashboard Manajemen Produk"
+    ],
+    "attributes": {
+      "techStack": "Next.js / WordPress WooCommerce Custom",
+      "setupDuration": "14-20 Hari Kerja",
+      "supportPeriod": "1 Tahun Dukungan Teknis & Pembaruan",
+      "licenseType": "SaaS / Dedicated Instance"
+    }
+  },
+  {
+    "id": "prod-web-04",
+    "name": "Portal Berita/Media",
+    "category": "PRODUK WEBSITE",
+    "type": "website",
+    "price": 12000000,
+    "billingPeriod": "one-time",
+    "description": "Platform penerbitan artikel, berita, dan opini publik dengan performa tinggi. Cocok untuk media lokal, portal berita daerah, maupun publikasi berskala nasional.",
+    "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Optimasi Google News & AMP Ready",
+      "Sistem Iklan (Google AdSense/Mandiri) Terkelola",
+      "Fitur Komentar Warga & Polling Pendapat",
+      "Pemisahan Kategori Berita Tak Terbatas",
+      "Dashboard Penulis, Editor, & Pemimpin Redaksi (Multi-user)"
+    ],
+    "attributes": {
+      "techStack": "Node.js & React / WordPress Engine Optimized",
+      "setupDuration": "7-10 Hari Kerja",
+      "supportPeriod": "1 Tahun Garansi",
+      "licenseType": "Unlimited Users"
+    }
+  },
+  {
+    "id": "prod-web-05",
+    "name": "Website Sekolah",
+    "category": "PRODUK WEBSITE",
+    "type": "website",
+    "price": 10000000,
+    "billingPeriod": "one-time",
+    "description": "Website resmi sekolah (SD/SMP/SMA/SMK/Sederajat) untuk sarana publikasi kegiatan belajar, profil guru, penerimaan siswa baru (PPDB) online, dan portal data alumni.",
+    "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Formulir Pendaftaran Siswa Baru (PPDB) Online",
+      "Database Profil Guru, Staf, & Kurikulum",
+      "Galeri Foto Kegiatan & Transparansi Anggaran",
+      "Integrasi Link Kalender Akademik",
+      "Domain sch.id Resmi Kelembagaan"
+    ],
+    "attributes": {
+      "techStack": "Laravel/PHP or Custom CMS",
+      "setupDuration": "7-12 Hari Kerja",
+      "supportPeriod": "1 Tahun Pendampingan Admin",
+      "licenseType": "Kelembagaan Sekolah"
+    }
+  },
+  {
+    "id": "prod-web-06",
+    "name": "Website UMKM",
+    "category": "PRODUK WEBSITE",
+    "type": "website",
+    "price": 7000000,
+    "billingPeriod": "one-time",
+    "description": "Katalog produk dan profil digital interaktif untuk usaha mikro, kecil, dan menengah (UMKM) agar tampil kredibel di pasar global. Termasuk peta lokasi usaha dan kontak pemesanan cepat.",
+    "image": "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Katalog Produk Non-Transaksi (Showcase)",
+      "Galeri Testimoni Pelanggan",
+      "Integrasi Lokasi Google Maps Usaha",
+      "SEO Lokal agar Mudah Ditemukan di Google",
+      "Desain Ringan & Hemat Kuota Internet"
+    ],
+    "attributes": {
+      "techStack": "Tailwind CSS & JAMstack",
+      "setupDuration": "4-6 Hari Kerja",
+      "supportPeriod": "1 Tahun Bantuan Teknis",
+      "licenseType": "Single Instance"
+    }
+  },
+  {
+    "id": "prod-web-07",
+    "name": "Website Organisasi",
+    "category": "PRODUK WEBSITE",
+    "type": "website",
+    "price": 8000000,
+    "billingPeriod": "one-time",
+    "description": "Website profil untuk lembaga swadaya masyarakat (LSM), yayasan, komunitas, atau badan kepemudaan untuk memperluas jangkauan sosial dan menggalang donasi/keanggotaan.",
+    "image": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Sistem Registrasi Anggota Komunitas",
+      "Integrasi Sistem Donasi Digital",
+      "Dokumentasi Kegiatan & Laporan Keuangan",
+      "Halaman Pengumuman & Agenda Komunitas",
+      "Sosial Media Auto-Share Integration"
+    ],
+    "attributes": {
+      "techStack": "React & Node.js / Custom Theme",
+      "setupDuration": "5-8 Hari Kerja",
+      "supportPeriod": "1 Tahun Garansi Sistem",
+      "licenseType": "Non-Profit License"
+    }
+  },
+  {
+    "id": "prod-web-08",
+    "name": "Custom Website + CMS",
+    "category": "PRODUK WEBSITE",
+    "type": "website",
+    "price": 25000000,
+    "billingPeriod": "one-time",
+    "description": "Layanan pembuatan website kustom dari awal (scratch) sesuai kebutuhan spesifik alur bisnis Anda. Dilengkapi dengan Content Management System (CMS) mandiri yang mudah digunakan.",
+    "image": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Arsitektur Data Kustom Sesuai Permintaan",
+      "Panel Admin Kustom Tanpa Batas Fitur",
+      "Optimasi Performa Web Super Cepat (Lighthouse 90+)",
+      "Integrasi API Pihak Ketiga (Custom API)",
+      "Keamanan Kustom & Perlindungan Data Sensitif"
+    ],
+    "attributes": {
+      "techStack": "Vite + React, Node.js Express, PostgreSQL / NoSQL",
+      "setupDuration": "20-30 Hari Kerja",
+      "supportPeriod": "1 Tahun Full-Support",
+      "licenseType": "Full Source-Code Ownership"
+    }
+  },
+  {
+    "id": "prod-web-09",
+    "name": "Mobile Responsive Landing Page",
+    "category": "PRODUK WEBSITE",
+    "type": "website",
+    "price": 4000000,
+    "billingPeriod": "one-time",
+    "description": "Landing page super responsif yang dioptimalkan 100% untuk layar smartphone/tablet. Cocok digunakan untuk kampanye iklan digital (Google Ads, Facebook Ads, TikTok Ads).",
+    "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Desain 'Mobile-First' Super Ringan",
+      "Kecepatan Pemuatan di Bawah 1.5 Detik",
+      "Penempatan CTA (Call-to-Action) Strategis",
+      "Sistem Tracking Piksel (FB Pixel/TikTok Pixel) Terpasang",
+      "A/B Testing Layout Sederhana"
+    ],
+    "attributes": {
+      "techStack": "Astro / NextJS static export",
+      "setupDuration": "2-3 Hari Kerja",
+      "supportPeriod": "6 Bulan Garansi Bug",
+      "licenseType": "Commercial License"
+    }
+  },
+  {
+    "id": "prod-web-10",
+    "name": "Website + Mobile App",
+    "category": "PRODUK WEBSITE",
+    "type": "website",
+    "price": 30000000,
+    "billingPeriod": "one-time",
+    "description": "Paket lengkap pembuatan website dinamis sekaligus versi aplikasi mobile Android (APK/AAB) yang siap diunggah ke Google Play Store untuk jangkauan pengguna terbaik.",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Satu Database Pusat Terintegrasi (Web & App)",
+      "Push Notification Real-time Ke HP Pengguna",
+      "Desain UI/UX Konsisten Lintas Platform",
+      "Dukungan Rilis Ke Google Play Store",
+      "Optimasi Keamanan Data Lintas Jalur API"
+    ],
+    "attributes": {
+      "techStack": "React Native, React, Node.js, MongoDB",
+      "setupDuration": "30-45 Hari Kerja",
+      "supportPeriod": "1 Tahun Pemeliharaan Berkala",
+      "licenseType": "Full App & Web Ownership"
+    }
+  },
+  {
+    "id": "prod-soft-01",
+    "name": "Sistem Informasi Desa (SID) Core",
+    "category": "PRODUK SOFTWARE",
+    "type": "software",
+    "price": 25000000,
+    "billingPeriod": "one-time",
+    "description": "Sistem aplikasi backend operasional kantor desa yang komprehensif. Mengelola data kependudukan, pembagian wilayah RT/RW, bantuan sosial (bansos), hingga pemetaan data spasial desa.",
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Manajemen Kependudukan (KK, Mutasi, Kematian, Lahir)",
+      "Modul Distribusi Bantuan Sosial (PKH, BLT, dll)",
+      "Pelaporan Data Statistik Otomatis (Grafik SDGS)",
+      "Ekspor-Impor Format Excel Terstandar Kemendagri",
+      "Peta Spasial Desa (Sistem Informasi Geografis)"
+    ],
+    "attributes": {
+      "platform": "Web-Based Intranet / Cloud Secured",
+      "systemRequirements": "Modern Web Browser, Internet aktif (optional)",
+      "userLimits": "Unlimited Users / Perangkat Kantor Desa",
+      "auditTrail": "ISO 27001 Log Audit Keamanan Aktif"
+    }
+  },
+  {
+    "id": "prod-soft-02",
+    "name": "Aplikasi Absensi Online",
+    "category": "PRODUK SOFTWARE",
+    "type": "software",
+    "price": 15000000,
+    "billingPeriod": "one-time",
+    "description": "Sistem absensi pegawai / perangkat desa berbasis lokasi GPS dan pengenalan wajah (face recognition). Menghilangkan kecurangan titip absen dan meningkatkan disiplin kerja.",
+    "image": "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Pencatatan Kehadiran Radius GPS (Geofencing)",
+      "Teknologi Anti-Fraud Face Matching & Selfie",
+      "Dashboard Rekapitulasi Otomatis Format Excel",
+      "Modul Pengajuan Izin, Cuti, & Lembur Terintegrasi",
+      "Notifikasi WhatsApp Kehadiran Masuk & Pulang"
+    ],
+    "attributes": {
+      "platform": "Web Dashboard + Android Mobile App",
+      "systemRequirements": "Android 8.0+ / Kamera HP & GPS Aktif",
+      "userLimits": "Hingga 200 Pegawai (Dapat Ditambah)",
+      "auditTrail": "Log Akses GPS Tersertifikasi"
+    }
+  },
+  {
+    "id": "prod-soft-03",
+    "name": "Sistem Surat Menyurat",
+    "category": "PRODUK SOFTWARE",
+    "type": "software",
+    "price": 12000000,
+    "billingPeriod": "one-time",
+    "description": "Otomatisasi pembuatan surat-surat resmi di lingkungan kantor desa atau instansi. Cukup masukkan NIK warga, sistem akan mengidentifikasi profil dan menyusun draf surat dalam 5 detik.",
+    "image": "https://images.unsplash.com/photo-1450133064473-71024230f91b?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Lebih dari 40 Template Surat Siap Pakai (SKU, SKTM, SKP, dll)",
+      "Sistem Tanda Tangan Elektronik (TTE) via Barcode / BSrE",
+      "Penomoran Surat Otomatis Berurutan Bebas Double",
+      "Pengarsipan Surat Masuk & Surat Keluar Digital",
+      "Kirim Dokumen Surat Jadi Langsung via WA PDF"
+    ],
+    "attributes": {
+      "platform": "Web-Based Client",
+      "systemRequirements": "Web Browser (Chrome/Firefox/Edge)",
+      "userLimits": "Tanpa Batas Penggunaan Dokumen Surat",
+      "auditTrail": "Dokumen Tercatat di Audit Log ISO 27001"
+    }
+  },
+  {
+    "id": "prod-soft-04",
+    "name": "Aplikasi Kasir POS",
+    "category": "PRODUK SOFTWARE",
+    "type": "software",
+    "price": 10000000,
+    "billingPeriod": "one-time",
+    "description": "Sistem Point of Sale (POS) handal untuk manajemen kasir toko retail, BUMDes, restoran, maupun apotek. Dilengkapi pelacakan stok multidepartemen.",
+    "image": "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Sistem Pembayaran Cash, QRIS, & Kartu Debit/Kredit",
+      "Manajemen Stok Produk & Peringatan Stok Menipis",
+      "Sistem Multi-Kasir dengan Shift Log",
+      "Cetak Struk Thermal & Kirim E-Receipt WhatsApp",
+      "Laporan Laba/Rugi Real-time & Analisa Produk Terlaris"
+    ],
+    "attributes": {
+      "platform": "Desktop & Tablet Web App",
+      "systemRequirements": "Min RAM 2GB, Printer Bluetooth/USB Thermal",
+      "userLimits": "Hingga 5 Kasir Paralel",
+      "auditTrail": "Audit log transaksi keuangan aman"
+    }
+  },
+  {
+    "id": "prod-soft-05",
+    "name": "Sistem Manajemen Sekolah",
+    "category": "PRODUK SOFTWARE",
+    "type": "software",
+    "price": 18000000,
+    "billingPeriod": "one-time",
+    "description": "Sistem informasi akademik sekolah (SIAKAD) terintegrasi. Mengatur penjadwalan kelas, rekap nilai siswa (Rapor), penagihan SPP, hingga portal khusus bagi guru dan wali murid.",
+    "image": "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Portal Siswa, Wali Murid, Guru, & Tata Usaha",
+      "E-Rapor Kurikulum Merdeka Otomatis",
+      "Sistem Keuangan & Tagihan SPP dengan Virtual Account",
+      "Manajemen Jadwal Mengajar & Pembagian Kelas",
+      "Pengumuman Real-time via Aplikasi & WA"
+    ],
+    "attributes": {
+      "platform": "SaaS Cloud Server",
+      "systemRequirements": "Koneksi Internet Stabil",
+      "userLimits": "Unlimited Siswa & Guru",
+      "auditTrail": "Proteksi Enkripsi Data Siswa"
+    }
+  },
+  {
+    "id": "prod-soft-06",
+    "name": "Aplikasi Inventaris",
+    "category": "PRODUK SOFTWARE",
+    "type": "software",
+    "price": 8000000,
+    "billingPeriod": "one-time",
+    "description": "Sistem pelacakan dan manajemen aset instansi / perusahaan. Mendata kepemilikan aset, depresiasi nilai tahunan, lokasi penempatan, serta penanggung jawab aset secara berkala.",
+    "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Labelisasi Aset dengan QR Code Unik",
+      "Sistem Pemindai QR via Kamera Smartphone",
+      "Perhitungan Depresiasi Aset Otomatis (Metode Garis Lurus)",
+      "Manajemen Peminjaman & Pengembalian Aset",
+      "Peringatan Jatuh Tempo Servis Pemeliharaan"
+    ],
+    "attributes": {
+      "platform": "Web & Mobile Scanner App",
+      "systemRequirements": "Kamera HP Aktif untuk Scan QR",
+      "userLimits": "Hingga 10.000 Aset Terdaftar",
+      "auditTrail": "Log Histori Aliran Mutasi Barang"
+    }
+  },
+  {
+    "id": "prod-soft-07",
+    "name": "CRM Custom Enterprise",
+    "category": "PRODUK SOFTWARE",
+    "type": "software",
+    "price": 20000000,
+    "billingPeriod": "one-time",
+    "description": "Sistem Customer Relationship Management yang disesuaikan penuh untuk tim sales dan customer service Anda. Membantu melacak prospek (lead), progres pitching, hingga penandatanganan kontrak penjualan.",
+    "image": "https://images.unsplash.com/photo-1552581234-2612b75d8953?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Visualisasi Sales Pipeline Ala Kanban Board",
+      "Integrasi Riwayat Chat WhatsApp & Email Klien",
+      "Sistem Reminder Otomatis Penagihan & Follow-Up",
+      "Analisa Performa Penjualan Sales Individu",
+      "Sistem Manajemen Kontrak Kerja & Dokumen Digital"
+    ],
+    "attributes": {
+      "platform": "Web SaaS Platform",
+      "systemRequirements": "Modern Desktop Web Browser",
+      "userLimits": "Hingga 50 Akun Sales & Tim Pendukung",
+      "auditTrail": "Akses Data Terenkripsi & Pembatasan Role"
+    }
+  },
+  {
+    "id": "prod-soft-08",
+    "name": "Sistem Manajemen Proyek",
+    "category": "PRODUK SOFTWARE",
+    "type": "software",
+    "price": 15000000,
+    "billingPeriod": "one-time",
+    "description": "Aplikasi kolaborasi internal perusahaan untuk pembagian tugas, pemantauan tenggat waktu (deadline), dan pencapaian milestone proyek tim secara transparan.",
+    "image": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Gantt Chart & Task Board Interaktif",
+      "Sistem Pencatatan Waktu Kerja (Time Tracker) Pegawai",
+      "Ruang Diskusi & Berbagi File Spesifik Proyek",
+      "Notifikasi Pengingat Tugas Melalui Email & WA",
+      "Laporan Efisiensi Waktu & Beban Kerja Tim"
+    ],
+    "attributes": {
+      "platform": "Web-Based Workspace",
+      "systemRequirements": "Internet standard",
+      "userLimits": "Hingga 100 Anggota Tim Aktif",
+      "auditTrail": "Log Aktivitas Perubahan Tugas"
+    }
+  },
+  {
+    "id": "prod-sub-01",
+    "name": "Cloud POS Pro",
+    "category": "PRODUK SUBSCRIPTION",
+    "type": "subscription",
+    "price": 500000,
+    "billingPeriod": "monthly",
+    "description": "Langganan bulanan software kasir cloud lengkap dengan sinkronisasi online instan lintas cabang. Kelola banyak toko cukup dalam satu akun dashboard praktis.",
+    "image": "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Sinkronisasi Multi-Toko Real-time",
+      "Koneksi Integrasi Printer Kasir & Scan Barcode",
+      "Pembaruan Fitur Gratis Setiap Bulan",
+      "Backup Data Otomatis ke Cloud Server FAS",
+      "Layanan Pelanggan Premium WA Group 24/7"
+    ],
+    "attributes": {
+      "subscriptionPeriod": "1 Bulan (Auto-renew tersedia)",
+      "hostingType": "FAS Dedicated Secured Cloud",
+      "minimumCommitment": "Tidak ada (Bisa berhenti kapan saja)",
+      "apiAccess": "Disediakan API integrasi e-commerce"
+    }
+  },
+  {
+    "id": "prod-sub-02",
+    "name": "Sistem Manajemen Proyek (Langganan)",
+    "category": "PRODUK SUBSCRIPTION",
+    "type": "subscription",
+    "price": 350000,
+    "billingPeriod": "monthly",
+    "description": "Langganan platform kolaborasi manajemen tugas tim yang tangguh. Solusi terjangkau untuk mengelola produktivitas startup dan tim UMKM tanpa investasi server fisik awal.",
+    "image": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Hingga 15 Proyek Aktif Bersamaan",
+      "Penyimpanan File Bersama hingga 50 GB",
+      "Template Alur Kerja Agile & Scrum",
+      "Dukungan Integrasi Slack & Google Drive",
+      "Keamanan Data Terenskripsi SSL 256-Bit"
+    ],
+    "attributes": {
+      "subscriptionPeriod": "1 Bulan",
+      "hostingType": "Shared Cloud Server",
+      "minimumCommitment": "Tidak ada",
+      "apiAccess": "Webhooks Standard"
+    }
+  },
+  {
+    "id": "prod-sub-03",
+    "name": "Aplikasi Akuntansi Online",
+    "category": "PRODUK SUBSCRIPTION",
+    "type": "subscription",
+    "price": 450000,
+    "billingPeriod": "monthly",
+    "description": "Sistem pencatatan keuangan akuntansi standar PSAK di Indonesia. Membuat laporan neraca, arus kas, perubahan modal, dan buku besar secara otomatis dari input harian kas.",
+    "image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Pembuatan Jurnal Umum, Buku Besar, & Neraca Saldo",
+      "Rekonsiliasi Bank Otomatis via Ekspor Rekening Koran",
+      "Manajemen Piutang & Pengingat Tagihan Faktur Otomatis",
+      "Multi-Mata Uang & Perhitungan Pajak PPN Terintegrasi",
+      "Ekspor PDF Laporan Keuangan untuk Rapat Pemegang Saham"
+    ],
+    "attributes": {
+      "subscriptionPeriod": "1 Bulan",
+      "hostingType": "FAS Financial High-Secure Cloud",
+      "minimumCommitment": "3 Bulan (Direkomendasikan)",
+      "apiAccess": "API Read-Only Keuangan"
+    }
+  },
+  {
+    "id": "prod-sub-04",
+    "name": "Sistem Manajemen SDM (HRIS)",
+    "category": "PRODUK SUBSCRIPTION",
+    "type": "subscription",
+    "price": 400000,
+    "billingPeriod": "monthly",
+    "description": "Sistem pengelolaan sumber daya manusia (HRIS) online untuk mempermudah perhitungan gaji (payroll), potongan BPJS/Pajak PPh 21, data kontrak, dan evaluasi kinerja karyawan.",
+    "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Perhitungan Payroll Otomatis (Gaji Pokok, Tunjangan, Potongan)",
+      "Slip Gaji Digital Terkirim Otomatis via WhatsApp PDF",
+      "Kalkulasi BPJS Kesehatan, BPJS Ketenagakerjaan, & PPh 21",
+      "Manajemen Database Riwayat Kerja & Kontrak Karyawan",
+      "Modul KPI (Key Performance Indicator) Penilaian Kinerja"
+    ],
+    "attributes": {
+      "subscriptionPeriod": "1 Bulan",
+      "hostingType": "Encrypted HR Database Server",
+      "minimumCommitment": "Tidak ada",
+      "apiAccess": "Tersedia"
+    }
+  },
+  {
+    "id": "prod-sub-05",
+    "name": "Aplikasi Manajemen Event",
+    "category": "PRODUK SUBSCRIPTION",
+    "type": "subscription",
+    "price": 300000,
+    "billingPeriod": "monthly",
+    "description": "Sistem manajemen penjualan tiket, registrasi peserta, pembuatan e-certificate, hingga scan barcode check-in di lokasi acara. Ideal untuk promotor, EO, atau pembuat webinar.",
+    "image": "https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Halaman Pemesanan Tiket dengan Form Isian Kustom",
+      "Sistem E-Ticket dengan QR Code untuk Pemindaian Masuk",
+      "Integrasi QR Scanner via Android/iOS Gratis",
+      "Pembuat & Pengirim E-Sertifikat Otomatis via Email massal",
+      "Statistik Penjualan Tiket & Kehadiran Real-time"
+    ],
+    "attributes": {
+      "subscriptionPeriod": "1 Bulan",
+      "hostingType": "Standard Web Server",
+      "minimumCommitment": "Tidak ada",
+      "apiAccess": "Disediakan"
+    }
+  },
+  {
+    "id": "prod-sub-06",
+    "name": "CRM Online Pro",
+    "category": "PRODUK SUBSCRIPTION",
+    "type": "subscription",
+    "price": 600000,
+    "billingPeriod": "monthly",
+    "description": "Sistem pengelolaan prospek dan kemitraan secara online. Membantu menjaga interaksi pelanggan, integrasi kampanye promosi WhatsApp Blast, dan manajemen layanan pengaduan tiket bantuan.",
+    "image": "https://images.unsplash.com/photo-1552581234-2612b75d8953?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Sistem CRM Pipeline dengan Manajemen Penugasan Sales",
+      "WhatsApp API Gateway Integration (Bebas Biaya Server Tambahan)",
+      "Sistem Tiket Bantuan & Komplain Pelanggan Terpusat",
+      "Segmentasi Data Pelanggan berdasarkan Pembelian",
+      "Analisa Konversi Prospek & Prediksi Tren Penjualan"
+    ],
+    "attributes": {
+      "subscriptionPeriod": "1 Bulan",
+      "hostingType": "FAS Sales Cloud Platform",
+      "minimumCommitment": "1 Bulan",
+      "apiAccess": "Full REST API Access"
+    }
+  },
+  {
+    "id": "prod-jasa-01",
+    "name": "Konsultasi Digitalisasi Desa",
+    "category": "LAYANAN JASA",
+    "type": "service",
+    "price": 2000000,
+    "billingPeriod": "per-session",
+    "description": "Sesi konsultasi intensif tatap muka (virtual/on-site) dengan pakar IT kami untuk memetakan kebutuhan digitalisasi desa Anda. Membantu merancang peta jalan (roadmap) Smart Village.",
+    "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Sesi Konsultasi Interaktif selama 120 Menit",
+      "Dokumen Rekomendasi Peta Jalan (Roadmap) Smart Village",
+      "Rancangan Anggaran Belanja (RAB) Kebutuhan IT Desa",
+      "Analisa Infrastruktur Jaringan & Keamanan Data Desa Saat Ini",
+      "Tanya Jawab Bebas Bersama Senior Consultant FAS"
+    ],
+    "attributes": {
+      "serviceDuration": "120 Menit / Sesi",
+      "deliveryMethod": "Zoom Meeting / Google Meet (Tersedia On-site daerah Jabodetabek)",
+      "deliverables": "PDF Blueprint Digitalisasi Desa & RAB",
+      "consultantExperience": "Min. 5 Tahun Pengalaman Tata Kelola IT Publik"
+    }
+  },
+  {
+    "id": "prod-jasa-02",
+    "name": "Pelatihan Operator Desa",
+    "category": "LAYANAN JASA",
+    "type": "service",
+    "price": 5000000,
+    "billingPeriod": "one-time",
+    "description": "Paket bimbingan teknis (Bimtek) komprehensif bagi seluruh perangkat desa atau operator SID agar mahir mengoperasikan sistem administrasi kependudukan digital.",
+    "image": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Pelatihan Terstruktur Selama 2 Hari Penuh",
+      "Materi Pembahasan Pengelolaan Database & Keamanan Informasi",
+      "Modul Panduan Cetak (Buku SOP) & Video Pembelajaran Lengkap",
+      "Sertifikat Pelatihan Kompetensi bagi Setiap Operator",
+      "Evaluasi & Pendampingan Pasca Pelatihan Selama 30 Hari"
+    ],
+    "attributes": {
+      "serviceDuration": "2 Hari Bimtek (4 Jam/Hari)",
+      "deliveryMethod": "Online / Offline (Kantor Desa / Hotel Terdekat)",
+      "deliverables": "Modul Praktis, Rekaman Pelatihan, Sertifikat",
+      "targetParticipants": "Hingga 10 Peserta Perangkat Desa"
+    }
+  },
+  {
+    "id": "prod-jasa-03",
+    "name": "Jasa Maintenance Website",
+    "category": "LAYANAN JASA",
+    "type": "service",
+    "price": 1000000,
+    "billingPeriod": "monthly",
+    "description": "Layanan pemeliharaan berkala untuk website Anda. Termasuk backup rutin, pembaruan plugin/sistem keamanan, perbaikan bug minor, serta pembaruan konten bulanan.",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Backup Mingguan Data & Kode Sumber Website",
+      "Pembaruan Rutin Core CMS, Tema, & Plugin Keamanan",
+      "Pengawasan Keamanan Uptime 24/7 (SLA 99.5%)",
+      "Alokasi Waktu 3 Jam per Bulan untuk Pembaruan Konten",
+      "Laporan Kesehatan Website & Analisa Pengunjung (Bulanan)"
+    ],
+    "attributes": {
+      "serviceDuration": "Pemeliharaan Bulanan (SLA Respon Bug < 4 Jam)",
+      "deliveryMethod": "Remote System Maintenance",
+      "deliverables": "Laporan Kinerja Bulanan & Status Uptime",
+      "coverageLimits": "Tidak termasuk desain ulang website secara total"
+    }
+  },
+  {
+    "id": "prod-jasa-04",
+    "name": "Jasa Optimasi SEO",
+    "category": "LAYANAN JASA",
+    "type": "service",
+    "price": 3000000,
+    "billingPeriod": "monthly",
+    "description": "Layanan Search Engine Optimization (SEO) profesional untuk menaikkan peringkat website bisnis Anda di halaman utama pencarian Google guna meningkatkan lalu lintas pengunjung organik.",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Riset Kata Kunci (Keyword Research) Potensial & Analisa Kompetitor",
+      "Optimasi On-Page SEO (Meta Tag, Kecepatan, Struktur Judul)",
+      "Pembuatan 4 Artikel Blog SEO-Friendly Berkulitas Tinggi per Bulan",
+      "Strategi Off-Page SEO & Pembangunan Backlink Berkualitas",
+      "Laporan Dashboard Mingguan Peringarat Kata Kunci di Google"
+    ],
+    "attributes": {
+      "serviceDuration": "Bulanan (Disarankan minimal kontrak 3 bulan)",
+      "deliveryMethod": "SEO Campaign Execution",
+      "deliverables": "Laporan Peringkat Kata Kunci & Analisa Trafik bulanan",
+      "guarantees": "Peningkatan lalu lintas organik secara bertahap"
+    }
+  },
+  {
+    "id": "prod-jasa-05",
+    "name": "Jasa Desain UI/UX",
+    "category": "LAYANAN JASA",
+    "type": "service",
+    "price": 4000000,
+    "billingPeriod": "one-time",
+    "description": "Jasa perancangan antarmuka (User Interface) dan pengalaman pengguna (User Experience) untuk aplikasi web atau mobile Anda dengan hasil desain visual interaktif yang modern.",
+    "image": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Riset Pengguna (User Research) & Pemetaan User Flow",
+      "Perancangan Wireframe (Layout Hitam Putih Dasar)",
+      "Desain Visual High-Fidelity Berwarna Premium",
+      "Prototipe Interaktif yang Dapat Diklik (Figma)",
+      "Penyerahan File Desain Terstruktur Siap Pakai untuk Developer"
+    ],
+    "attributes": {
+      "serviceDuration": "10-15 Hari Kerja",
+      "deliveryMethod": "Figma Link Shared",
+      "deliverables": "Link Project Figma, Aset Ikon, Wireframe",
+      "revisionLimits": "Maksimal 3 Kali Revisi Besar"
+    }
+  },
+  {
+    "id": "prod-jasa-06",
+    "name": "Jasa Instalasi & Konfigurasi",
+    "category": "LAYANAN JASA",
+    "type": "service",
+    "price": 2500000,
+    "billingPeriod": "one-time",
+    "description": "Jasa ahli untuk instalasi sistem operasi server, konfigurasi database, penyiapan Web Server (Nginx/Apache), setup SSL, dan migrasi domain agar aplikasi Anda siap digunakan secara stabil.",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Setup Server VPS Linux (Ubuntu / Debian / CentOS)",
+      "Konfigurasi Web Server Nginx & Node.js/PHP Environment",
+      "Instalasi Database Server (PostgreSQL / MySQL) & Keamanan",
+      "Setup SSL Let's Encrypt Gratis (HTTPS Selamanya)",
+      "Konfigurasi Keamanan Firewall Dasar Server"
+    ],
+    "attributes": {
+      "serviceDuration": "2-3 Hari Kerja",
+      "deliveryMethod": "Remote SSH Access",
+      "deliverables": "Kredensial Login Server Aman & Dokumentasi Setup",
+      "supportPeriod": "7 Hari Garansi Pasca Setup"
+    }
+  },
+  {
+    "id": "prod-jasa-07",
+    "name": "Jasa Data Entry & Migrasi",
+    "category": "LAYANAN JASA",
+    "type": "service",
+    "price": 1500000,
+    "billingPeriod": "one-time",
+    "description": "Layanan pembersihan, penataan, dan input data kependudukan manual dari buku register desa fisik ke dalam database Sistem Informasi Desa (SID) digital secara akurat.",
+    "image": "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Pembersihan Data Ganda & Format Tidak Sesuai",
+      "Input Manual Data Kependudukan NIK & Nomor KK Warga",
+      "Verifikasi Akurasi Data Lintas Lembaga Terkait",
+      "Format Output Siap Impor Otomatis ke Database SID",
+      "Pemberlakuan Kerahasiaan Data secara Hukum (Non-Disclosure Agreement)"
+    ],
+    "attributes": {
+      "serviceDuration": "5-7 Hari Kerja (Tergantung Jumlah Data)",
+      "deliveryMethod": "Secured File Transfer (Excel Encrypted)",
+      "deliverables": "File Data yang Bersih, Rapi, & Laporan Rekonsiliasi",
+      "coverageLimits": "Maksimal hingga 2.500 baris data kependudukan"
+    }
+  },
+  {
+    "id": "prod-jasa-08",
+    "name": "Jasa Audit Keamanan Siber",
+    "category": "LAYANAN JASA",
+    "type": "service",
+    "price": 5000000,
+    "billingPeriod": "one-time",
+    "description": "Evaluasi celah keamanan (Penetration Testing) pada website atau aplikasi internal Anda demi memastikan ketahanan sistem dari serangan hacker, peretasan database, atau kebocoran data sensitif.",
+    "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Analisa Kerentanan Otomatis (Vulnerability Assessment)",
+      "Percobaan Penetrasi Manual (Ethical Hacking)",
+      "Audit Keamanan Kode Sumber Aplikasi (Static Code Analysis)",
+      "Pemeriksaan Kerentanan Server (OS & Port Terbuka)",
+      "Laporan Audit Keamanan Lengkap Beserta Rekomendasi Perbaikan"
+    ],
+    "attributes": {
+      "serviceDuration": "5-10 Hari Kerja",
+      "deliveryMethod": "Audit Pentest Execution",
+      "deliverables": "Laporan PDF Pentest (Temuan Celah & Cara Patching)",
+      "auditStandard": "OWASP Top 10 Security Checklist & ISO 27001 Standards"
+    }
+  },
+  {
+    "id": "prod-dig-01",
+    "name": "Template Word Surat Desa",
+    "category": "PRODUK DIGITAL",
+    "type": "digital",
+    "price": 500000,
+    "billingPeriod": "one-time",
+    "description": "Kumpulan template dokumen surat menyurat resmi tingkat desa berformat Microsoft Word (.docx) yang rapi, sesuai standar tata naskah dinas Permendagri terbaru.",
+    "image": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Lebih dari 50 Jenis Template Surat (Keterangan Usaha, Kematian, Domisili, dll)",
+      "Format Microsoft Word (.docx) yang Mudah Diedit",
+      "Dilengkapi Logo Lambang Daerah (Bisa Diganti Sendiri)",
+      "Tata Letak dan Aturan Margin yang Presisi",
+      "Bonus File Contoh Pengisian Data Surat"
+    ],
+    "attributes": {
+      "fileFormat": "Microsoft Word (.docx) / ZIP Archive",
+      "fileSize": "12.5 MB",
+      "license": "Personal Use / Kantor Desa (Bebas Diedit Sepuasnya)",
+      "deliveryType": "Download Link Instan Pasca Pembayaran"
+    }
+  },
+  {
+    "id": "prod-dig-02",
+    "name": "Plugin WordPress Pajak Bumi (PBB)",
+    "category": "PRODUK DIGITAL",
+    "type": "digital",
+    "price": 2000000,
+    "billingPeriod": "one-time",
+    "description": "Plugin WordPress siap pakai untuk memudahkan warga mengecek status tagihan Pajak Bumi dan Bangunan (PBB-P2) secara mandiri hanya dengan memasukkan Nomor Objek Pajak (NOP).",
+    "image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Pencarian Data NOP Real-time",
+      "Integrasi Mudah dengan Kode Shortcode WordPress",
+      "Desain Form Pencarian Minimalis & Responsif",
+      "Database Terenskripsi Menggunakan SQLite / MySQL",
+      "Tombol Cetak Bukti Bayar / Tagihan Mandiri (.PDF)"
+    ],
+    "attributes": {
+      "compatibility": "WordPress 5.8+, PHP 7.4+",
+      "fileFormat": "Plugin .ZIP File",
+      "license": "Single Domain (Dapat Diperbarui)",
+      "deliveryType": "Download Instan"
+    }
+  },
+  {
+    "id": "prod-dig-03",
+    "name": "E-book Panduan Digitalisasi Desa",
+    "category": "PRODUK DIGITAL",
+    "type": "digital",
+    "price": 150000,
+    "billingPeriod": "one-time",
+    "description": "Buku panduan digital berformat PDF berisi langkah praktis, strategi penganggaran APBDes, dan panduan teknis merancang ekosistem Smart Village mandiri demi melayani warga dengan efisien.",
+    "image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Total 180 Halaman Materi Padat & Studi Kasus Nyata",
+      "Strategi Hukum Keamanan Informasi Desa (Undang-Undang KIP)",
+      "Panduan Penyusunan Regulasi Perdes Digitalisasi",
+      "Daftar Rekomendasi Tools & Perangkat Keras Hemat Biaya",
+      "Format EPUB & PDF yang Nyaman Dibaca di HP/Tablet"
+    ],
+    "attributes": {
+      "fileFormat": "PDF & EPUB",
+      "fileSize": "8.2 MB",
+      "license": "Single-User Personal License (Kerahasiaan Terproteksi Watermark)",
+      "deliveryType": "Download Instan"
+    }
+  },
+  {
+    "id": "prod-dig-04",
+    "name": "Template Excel APBDes Interaktif",
+    "category": "PRODUK DIGITAL",
+    "type": "digital",
+    "price": 300000,
+    "billingPeriod": "one-time",
+    "description": "Template Microsoft Excel yang dilengkapi rumus formula otomatis untuk menyusun, memantau, dan memvisualisasikan realisasi Anggaran Pendapatan dan Belanja Desa (APBDes) secara transparan.",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Rumus Excel Otomatis untuk Laporan Surplus / Defisit",
+      "Grafik Interaktif Pembuatan Infografis Baliho Transparansi APBDes",
+      "Validasi Data Error untuk Menghindari Double Input",
+      "Dukungan Format Excel 2013 hingga Versi Terbaru",
+      "Panduan Video Cara Penggunaan dan Import Data"
+    ],
+    "attributes": {
+      "fileFormat": "Microsoft Excel (.xlsx)",
+      "fileSize": "4.1 MB",
+      "license": "Kantor Desa / Komunitas (Bebas Modifikasi)",
+      "deliveryType": "Download Instan"
+    }
+  },
+  {
+    "id": "prod-dig-05",
+    "name": "Template Company Profile Agency",
+    "category": "PRODUK DIGITAL",
+    "type": "digital",
+    "price": 1500000,
+    "billingPeriod": "one-time",
+    "description": "Template siap pakai berupa slide presentasi (PowerPoint / Canva) untuk mengenalkan profil perusahaan, penawaran jasa, dan proposal kerjasama bisnis dengan estetika desain yang modern.",
+    "image": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "35 Layout Slide Unik (Profil, Layanan, Portofolio, Pricing, Team)",
+      "Tersedia Format PowerPoint (.pptx) & Link Canva Edit",
+      "Desain Beresolusi Tinggi Full HD (16:9)",
+      "Pilihan Kombinasi Warna yang Mudah Dikustomisasi",
+      "Termasuk Lisensi Font & Aset Ikon Vektor Gratis"
+    ],
+    "attributes": {
+      "fileFormat": "PowerPoint (.pptx) / Link Canva",
+      "fileSize": "28.3 MB",
+      "license": "Commercial Agency License",
+      "deliveryType": "Download Instan"
+    }
+  },
+  {
+    "id": "prod-dig-06",
+    "name": "Plugin WordPress SID",
+    "category": "PRODUK DIGITAL",
+    "type": "digital",
+    "price": 3000000,
+    "billingPeriod": "one-time",
+    "description": "Plugin WordPress profesional untuk menghubungkan website berita desa Anda dengan database Sistem Informasi Desa pusat agar dapat menampilkan data statistik kependudukan interaktif secara dinamis.",
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Menghasilkan Grafik Demografis Penduduk secara Otomatis",
+      "Widget Pengumuman Penting Kantor Desa untuk Sidebar",
+      "Sistem Caching Tingkat Tinggi agar Kecepatan Akses Ringan",
+      "Formulir Layanan Aspirasi Warga (Kotak Pengaduan Digital)",
+      "Keamanan Enkripsi Jalur Komunikasi API (API Key Secured)"
+    ],
+    "attributes": {
+      "compatibility": "WordPress 5.5+, PHP 7.4 / 8.0+",
+      "fileFormat": "WordPress Plugin .ZIP Archive",
+      "license": "Multi-site Developer License",
+      "deliveryType": "Download Instan"
+    }
+  },
+  {
+    "id": "prod-host-01",
+    "name": "Domain .com (Registrasi)",
+    "category": "HOSTING & DOMAIN",
+    "type": "hosting",
+    "price": 180000,
+    "billingPeriod": "yearly",
+    "description": "Layanan pendaftaran domain internasional berakhiran .com untuk bisnis, portal berita, atau portofolio pribadi Anda dengan kontrol penuh DNS dan proteksi privasi Whois gratis.",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Akses DNS Management Panel yang Cepat",
+      "Sistem Keamanan Proteksi WHOIS (Menyamarkan Data Pemilik)",
+      "Email Forwarding Kustom Gratis",
+      "Proses Aktivasi Cepat dalam Waktu Kurang dari 1 Jam",
+      "Sistem Reminder Otomatis Sebelum Masa Aktif Berakhir"
+    ],
+    "attributes": {
+      "registrationPeriod": "1 Tahun",
+      "dnsPropagationTime": "10 - 30 Menit",
+      "whoisPrivacy": "Tersertifikasi Gratis",
+      "renewPrice": "Rp 195.000 / Tahun (Estimasi regulasi ICANN)"
+    }
+  },
+  {
+    "id": "prod-host-02",
+    "name": "Domain .id (Registrasi Resmi)",
+    "category": "HOSTING & DOMAIN",
+    "type": "hosting",
+    "price": 250000,
+    "billingPeriod": "yearly",
+    "description": "Domain premium identitas resmi Republik Indonesia (.id) yang memiliki reputasi tinggi di mesin pencari Google Indonesia. Memberikan kesan terpercaya bagi instansi, bisnis, maupun personal lokal.",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Persyaratan Pendaftaran Mudah & Dibantu Tim FAS",
+      "Reputasi SEO Lokal Terbaik untuk Pencarian di Indonesia",
+      "Akses Panel Pengelolaan Name Server & DNS Kustom",
+      "Penyandian Data WHOIS Terlindungi Regulasi PANDI",
+      "Dukungan Dokumen Penjelasan Hukum Domain Resmi"
+    ],
+    "attributes": {
+      "registrationPeriod": "1 Tahun",
+      "dnsPropagationTime": "5 - 15 Menit",
+      "requirements": "KTP Republik Indonesia (untuk perorangan) / Akta (perusahaan)",
+      "renewPrice": "Rp 250.000 / Tahun"
+    }
+  },
+  {
+    "id": "prod-host-03",
+    "name": "Shared Hosting Basic Cloud",
+    "category": "HOSTING & DOMAIN",
+    "type": "hosting",
+    "price": 500000,
+    "billingPeriod": "yearly",
+    "description": "Shared Cloud Hosting berkecepatan tinggi dengan media penyimpanan SSD NVMe yang super cepat. Sangat cocok untuk website desa, landing page UMKM, sekolah, maupun blog berita pemula.",
+    "image": "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Ruang Penyimpanan (Disk Space) 5 GB NVMe SSD",
+      "Bandwidth Bulanan Tanpa Batas (Unlimited)",
+      "Panel Kontrol cPanel / DirectAdmin yang Mudah Digunakan",
+      "Sistem Backup Data Mingguan Otomatis",
+      "SSL Certificate (HTTPS) Let's Encrypt Gratis Selamanya"
+    ],
+    "attributes": {
+      "diskSpace": "5 GB NVMe SSD",
+      "ramLimit": "1 GB RAM",
+      "cpuAllocation": "1 Core vCPU",
+      "uptimeSla": "99.9% Uptime Guarantee"
+    }
+  },
+  {
+    "id": "prod-host-04",
+    "name": "VPS Standard Node",
+    "category": "HOSTING & DOMAIN",
+    "type": "hosting",
+    "price": 2500000,
+    "billingPeriod": "monthly",
+    "description": "Server Virtual Pribadi (VPS) dengan dedicated resources berkinerja tinggi. Pilihan terbaik untuk hosting sistem informasi desa terpusat, aplikasi e-commerce besar, absensi online, atau database keuangan instansi.",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Dedicated Resource: 4 Core vCPU & 8 GB RAM DDR4",
+      "Media Penyimpanan 100 GB NVMe Enterprise Storage",
+      "Kecepatan Jaringan Port Up to 1 Gbps Tanpa Batas",
+      "Akses ROOT SSH Penuh & Pilihan OS Linux Populer",
+      "Sistem Proteksi Kebakaran & Backup Tingkat Datacenter Tier 3"
+    ],
+    "attributes": {
+      "vCpu": "4 Cores Intel Xeon",
+      "ram": "8 GB DDR4 Dedicated",
+      "diskSpace": "100 GB NVMe SSD",
+      "bandwidth": "Unmetered Bandwidth / Port 1Gbps"
+    }
+  },
+  {
+    "id": "prod-host-05",
+    "name": "Sertifikat SSL Pro (Digicert)",
+    "category": "HOSTING & DOMAIN",
+    "type": "hosting",
+    "price": 350000,
+    "billingPeriod": "yearly",
+    "description": "Sertifikat keamanan SSL profesional berbayar dengan perlindungan enkripsi tingkat tinggi 256-bit dan garansi keamanan transaksi finansial. Memberikan ikon gembok hijau aman di browser klien.",
+    "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&auto=format&fit=crop&q=60",
+    "features": [
+      "Enkripsi SHA-2 Kuat & Proteksi data HTTPS 256-Bit",
+      "Validasi Domain Cepat (Sertifikat Terbit dalam 15 Menit)",
+      "Kompatibel dengan 99.9% Web Browser & Sistem Operasi HP",
+      "Garansi Perlindungan Finansial Keamanan Hingga USD 10.000",
+      "Meningkatkan Kepercayaan Konsumen & Skor SEO Google"
+    ],
+    "attributes": {
+      "validityPeriod": "1 Tahun",
+      "encryptionStrength": "Up to 256-bit",
+      "validationType": "DV (Domain Validation)",
+      "browserCompatibility": "99.9% Browser Support"
+    }
+  }
+]

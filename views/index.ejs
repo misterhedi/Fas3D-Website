@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PT FAS Technology Solutions - 3D Company Profile</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS (served globally but we write premium CSS to augment it) -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="dark-theme">
+
+  <!-- 1. LOADING SCREEN -->
+  <div id="loader" class="loader-container">
+    <div class="loader-content">
+      <div class="loader-logo-wrapper">
+        <span class="loader-logo-text">FAS</span>
+        <div class="loader-ring"></div>
+      </div>
+      <h2 class="loader-title">PT FAS Technology Solutions</h2>
+      <p class="loader-subtitle">Menyiapkan Pengalaman 3D Interaktif...</p>
+      <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <span id="progress-text" class="progress-text">0%</span>
+    </div>
+  </div>
+
+  <!-- 3D WEBGL CANVAS -->
+  <canvas id="webgl" class="webgl-canvas"></canvas>
+
+  <!-- BACKGROUND SOUND INSTRUCTIONS / FLOATING HUD -->
+  <div class="ambient-indicator">
+    <button id="sound-btn" class="hud-btn" title="Nyalakan Musik Latar">
+      <i data-lucide="volume-x" id="sound-icon"></i>
+      <span class="hud-btn-text">Musik</span>
+    </button>
+    <button id="theme-btn" class="hud-btn" title="Ganti Tema">
+      <i data-lucide="sun" id="theme-icon"></i>
+      <span class="hud-btn-text">Tema</span>
+    </button>
+    <button id="reset-cam-btn" class="hud-btn" title="Reset Pandangan Kamera">
+      <i data-lucide="rotate-ccw"></i>
+      <span class="hud-btn-text">Reset 3D</span>
+    </button>
+  </div>
+
+  <!-- MAIN INTERACTIVE OVERLAY -->
+  <main class="ui-wrapper">
+    
+    <!-- HEADER -->
+    <header class="glass-header">
+      <div class="logo-area">
+        <div class="logo-3d-dot"></div>
+        <div class="logo-name">
+          <span class="logo-main">FAS Tech</span>
+          <span class="logo-sub">PT FAS Technology Solutions</span>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#hero" class="nav-item active">Beranda</a>
+        <a href="#about" class="nav-item">Profil</a>
+        <a href="#products" class="nav-item">Produk</a>
+        <a href="#legal" class="nav-item">Legalitas</a>
+        <a href="#contact" class="nav-item">Kontak</a>
+      </nav>
+      <div class="mobile-menu-toggle" id="menu-toggle">
+        <i data-lucide="menu"></i>
+      </div>
+    </header>
+
+    <!-- MOBILE NAV DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <nav class="mobile-nav-links">
+        <a href="#hero" class="mobile-nav-item">Beranda</a>
+        <a href="#about" class="mobile-nav-item">Profil</a>
+        <a href="#products" class="mobile-nav-item">Produk</a>
+        <a href="#legal" class="mobile-nav-item">Legalitas</a>
+        <a href="#contact" class="mobile-nav-item">Kontak</a>
+      </nav>
+    </div>
+
+    <!-- 3D INTERACTIVE CONTROLS HUD (BOTTOM LEFT) -->
+    <div class="control-hud">
+      <div class="hud-title"><i data-lucide="box" class="hud-icon"></i> PANEL NAVIGASI 3D</div>
+      <p class="hud-desc">Gunakan mouse/sentuhan di latar belakang untuk memutar, memperbesar, dan menggeser model 3D FAS.</p>
+      <div class="hud-actions">
+        <button class="cam-preset-btn" data-view="front">Fokus Depan</button>
+        <button class="cam-preset-btn" data-view="top">Fokus Atas</button>
+        <button class="cam-preset-btn" data-view="particles">Mode Partikel</button>
+      </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="overlay-section active-section">
+      <div class="hero-container">
+        <div class="hero-badge animate-fade">
+          <span class="badge-dot"></span>
+          <span>SOLUSI TEKNOLOGI TERPERCAYA</span>
+        </div>
+        <h1 class="hero-title animate-slide">
+          PT FAS <span class="text-accent">Technology</span> Solutions
+        </h1>
+        <p class="hero-subtitle animate-fade">
+          Solusi Digital Terpadu untuk Desa Modern. Kami menghadirkan inovasi teknologi informasi tercanggih untuk mendigitalisasi layanan, administrasi, dan kinerja pemerintahan daerah.
+        </p>
+        
+        <div class="hero-cta-group animate-fade">
+          <a href="#products" class="btn-primary ripple-btn">
+            <span>Lihat Produk Unggulan</span>
+            <i data-lucide="arrow-right"></i>
+          </a>
+          <a href="#contact" class="btn-secondary">
+            <span>Hubungi Kami</span>
+            <i data-lucide="phone"></i>
+          </a>
+        </div>
+
+        <!-- scroll-hint -->
+        <div class="scroll-hint">
+          <span class="scroll-text">Gulir untuk eksplorasi lebih jauh</span>
+          <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFIL / ABOUT SECTION -->
+    <section id="about" class="overlay-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">PROFIL PERUSAHAAN</span>
+          <h2 class="section-title">Inovasi Tiada Henti Untuk Desa</h2>
+        </div>
+        
+        <div class="bento-grid">
+          <!-- Main vision card -->
+          <div class="bento-card glass-card span-2 highlight-card">
+            <div class="card-glow"></div>
+            <div class="card-icon-wrapper">
+              <i data-lucide="sparkles"></i>
+            </div>
+            <h3>Visi Kami</h3>
+            <p>Menjadi mitra teknologi terdepan dalam mewujudkan ekosistem pemerintahan desa yang modern, mandiri, transparan, dan berbasis digital di seluruh penjuru Indonesia.</p>
+          </div>
+          
+          <!-- Mission card -->
+          <div class="bento-card glass-card">
+            <div class="card-icon-wrapper text-accent-blue">
+              <i data-lucide="trending-up"></i>
+            </div>
+            <h3>Misi Utama</h3>
+            <p>Mengembangkan perangkat lunak inovatif yang mudah dioperasikan guna meningkatkan efisiensi administrasi desa, pelayanan publik, serta kedisiplinan perangkat desa.</p>
+          </div>
+
+          <!-- Target card -->
+          <div class="bento-card glass-card">
+            <div class="card-icon-wrapper text-accent-gold">
+              <i data-lucide="users"></i>
+            </div>
+            <h3>Fokus Pengguna</h3>
+            <p>Pemerintah Desa, Perangkat Desa, Badan Permusyawaratan Desa (BPD), serta masyarakat luas yang membutuhkan akses informasi cepat dan akurat.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUK UNGGULAN SECTION -->
+    <section id="products" class="overlay-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">PORTFOLIO</span>
+          <h2 class="section-title">Produk Digital Unggulan Kami</h2>
+          <p class="section-subtitle">Sistem aplikasi pintar yang dirancang khusus untuk memenuhi standarisasi digitalisasi pemerintahan desa modern.</p>
+        </div>
+
+        <div class="products-grid">
+          <!-- Product 1 -->
+          <div class="product-card glass-card" data-product="sid">
+            <div class="product-glow blue-glow"></div>
+            <div class="product-header">
+              <div class="product-icon bg-blue">
+                <i data-lucide="globe"></i>
+              </div>
+              <span class="product-badge">Terpopuler</span>
+            </div>
+            <h3 class="product-title">Sistem Informasi Desa (SID)</h3>
+            <p class="product-desc">Platform digital terintegrasi untuk pengelolaan administrasi, pelayanan publik, kependudukan, dan transparansi anggaran desa secara online.</p>
+            <ul class="product-features">
+              <li><i data-lucide="check" class="check-icon"></i> Database Kependudukan Akurat</li>
+              <li><i data-lucide="check" class="check-icon"></i> Portal Berita & Informasi Desa</li>
+              <li><i data-lucide="check" class="check-icon"></i> Grafik Statistik Desa Otomatis</li>
+            </ul>
+            <div class="product-action">
+              <button class="btn-product-detail" data-target="sid-detail">Pelajari Fitur Detail</button>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card glass-card" data-product="absensi">
+            <div class="product-glow gold-glow"></div>
+            <div class="product-header">
+              <div class="product-icon bg-gold">
+                <i data-lucide="smartphone"></i>
+              </div>
+              <span class="product-badge">Inovatif</span>
+            </div>
+            <h3 class="product-title">Absensi Online Perangkat</h3>
+            <p class="product-desc">Sistem pencatatan kehadiran berbasis lokasi (GPS) dan pengenalan wajah untuk perangkat desa guna meningkatkan kedisiplinan dan kinerja harian.</p>
+            <ul class="product-features">
+              <li><i data-lucide="check" class="check-icon"></i> Deteksi Wajah (Face Recognition)</li>
+              <li><i data-lucide="check" class="check-icon"></i> Radius Lokasi GPS Kantor Desa</li>
+              <li><i data-lucide="check" class="check-icon"></i> Laporan Kehadiran Bulanan PDF/Excel</li>
+            </ul>
+            <div class="product-action">
+              <button class="btn-product-detail" data-target="absensi-detail">Pelajari Fitur Detail</button>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card glass-card" data-product="surat">
+            <div class="product-glow blue-bright-glow"></div>
+            <div class="product-header">
+              <div class="product-icon bg-blue-bright">
+                <i data-lucide="mail"></i>
+              </div>
+              <span class="product-badge">Efisien</span>
+            </div>
+            <h3 class="product-title">Sistem Surat Menyurat</h3>
+            <p class="product-desc">Digitalisasi birokrasi surat-menyurat dengan template otomatis, tanda tangan digital (TTE), serta pelacakan status permohonan surat secara real-time.</p>
+            <ul class="product-features">
+              <li><i data-lucide="check" class="check-icon"></i> 50+ Kategori Surat Standar Desa</li>
+              <li><i data-lucide="check" class="check-icon"></i> Integrasi Tanda Tangan Digital</li>
+              <li><i data-lucide="check" class="check-icon"></i> Pengajuan Mandiri via Mobile App</li>
+            </ul>
+            <div class="product-action">
+              <button class="btn-product-detail" data-target="surat-detail">Pelajari Fitur Detail</button>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card glass-card" data-product="pbb">
+            <div class="product-glow cyan-glow"></div>
+            <div class="product-header">
+              <div class="product-icon bg-cyan">
+                <i data-lucide="receipt"></i>
+              </div>
+              <span class="product-badge">Akuntabel</span>
+            </div>
+            <h3 class="product-title">Sistem Pengelolaan PBB</h3>
+            <p class="product-desc">Solusi pelacakan tagihan, penagihan kolektif, dan pelaporan realisasi Pajak Bumi dan Bangunan (PBB) tingkat desa secara presisi, akurat, dan transparan.</p>
+            <ul class="product-features">
+              <li><i data-lucide="check" class="check-icon"></i> Pemetaan Blok PBB Interaktif</li>
+              <li><i data-lucide="check" class="check-icon"></i> Notifikasi Tagihan via WhatsApp</li>
+              <li><i data-lucide="check" class="check-icon"></i> Laporan Realisasi Pajak per Dusun</li>
+            </ul>
+            <div class="product-action">
+              <button class="btn-product-detail" data-target="pbb-detail">Pelajari Fitur Detail</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEGALITAS SECTION -->
+    <section id="legal" class="overlay-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">KREDIbilitas & LEGALITAS</span>
+          <h2 class="section-title">Dokumen Resmi Perusahaan</h2>
+          <p class="section-subtitle">PT FAS Technology Solutions adalah badan hukum resmi yang terdaftar dan tunduk pada regulasi Republik Indonesia.</p>
+        </div>
+
+        <div class="legal-flex">
+          <div class="legal-info-card glass-card">
+            <div class="legal-badge-icon">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <h3>Legalitas Hukum</h3>
+            <p>Sebagai komitmen profesionalitas, perusahaan kami telah terdaftar resmi di Kementerian Hukum dan Hak Asasi Manusia serta instansi terkait.</p>
+            
+            <div class="legal-items-list">
+              <div class="legal-item">
+                <div class="legal-item-icon"><i data-lucide="file-text"></i></div>
+                <div class="legal-item-details">
+                  <span class="legal-label">SK Kemenkumham RI</span>
+                  <span class="legal-value">AHU-0062418.AH.01.01.Tahun 2023</span>
+                </div>
+              </div>
+
+              <div class="legal-item">
+                <div class="legal-item-icon"><i data-lucide="credit-card"></i></div>
+                <div class="legal-item-details">
+                  <span class="legal-label">NPWP Perusahaan</span>
+                  <span class="legal-value">40.824.182.9-411.000</span>
+                </div>
+              </div>
+
+              <div class="legal-item">
+                <div class="legal-item-icon"><i data-lucide="briefcase"></i></div>
+                <div class="legal-item-details">
+                  <span class="legal-label">NIB (Nomor Induk Berusaha)</span>
+                  <span class="legal-value">1209230045612</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="legal-visual-card glass-card">
+            <div class="iso-badge">
+              <span class="iso-title">STANDAR</span>
+              <span class="iso-num">NASIONAL</span>
+              <span class="iso-desc">Keamanan & Keandalan</span>
+            </div>
+            <div class="legal-guarantees">
+              <div class="guarantee-chip">
+                <i data-lucide="check-circle-2" class="text-accent-gold"></i>
+                <span>SLA Keandalan Sistem 99.9%</span>
+              </div>
+              <div class="guarantee-chip">
+                <i data-lucide="check-circle-2" class="text-accent-gold"></i>
+                <span>Enkripsi Data Enkripsi End-to-End</span>
+              </div>
+              <div class="guarantee-chip">
+                <i data-lucide="check-circle-2" class="text-accent-gold"></i>
+                <span>Dukungan Teknis Siap Siaga 24/7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAK / CONTACT SECTION -->
+    <section id="contact" class="overlay-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">KONTAK KAMI</span>
+          <h2 class="section-title">Hubungi Tim Ahli Kami</h2>
+          <p class="section-subtitle">Mari diskusikan solusi teknologi terbaik untuk digitalisasi instansi dan desa Anda.</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact detail cards -->
+          <div class="contact-info-panel glass-card">
+            <h3>Informasi Kontak</h3>
+            
+            <div class="contact-channels">
+              <div class="channel-item">
+                <div class="channel-icon bg-blue">
+                  <i data-lucide="map-pin"></i>
+                </div>
+                <div class="channel-details">
+                  <h4>Alamat Kantor</h4>
+                  <p>Jl. Raya Malingping-Rangkasbitung Km. 2, Malingping, Lebak, Banten 42391</p>
+                </div>
+              </div>
+
+              <div class="channel-item">
+                <div class="channel-icon bg-gold">
+                  <i data-lucide="mail"></i>
+                </div>
+                <div class="channel-details">
+                  <h4>E-mail Resmi</h4>
+                  <p>info@fastech.id <br><span class="text-xs text-muted">malingpingpos@gmail.com</span></p>
+                </div>
+              </div>
+
+              <div class="channel-item">
+                <div class="channel-icon bg-cyan">
+                  <i data-lucide="phone-call"></i>
+                </div>
+                <div class="channel-details">
+                  <h4>WhatsApp Chat</h4>
+                  <p>+62 812-1122-3344</p>
+                </div>
+              </div>
+
+              <div class="channel-item">
+                <div class="channel-icon bg-blue-bright">
+                  <i data-lucide="globe-2"></i>
+                </div>
+                <div class="channel-details">
+                  <h4>Website Resmi</h4>
+                  <p>www.fastech.id</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact form / CTA -->
+          <div class="contact-form-panel glass-card">
+            <h3>Kirim Pesan Cepat</h3>
+            <form id="quick-msg-form" onsubmit="event.preventDefault(); alert('Terima kasih! Pesan Anda telah terkirim ke tim kami.');">
+              <div class="form-group">
+                <label for="client-name">Nama Instansi / Pribadi</label>
+                <input type="text" id="client-name" placeholder="cth. Desa Malingping Selatan" required>
+              </div>
+              <div class="form-group">
+                <label for="client-phone">Nomor WhatsApp</label>
+                <input type="tel" id="client-phone" placeholder="cth. 0812XXXXXXXX" required>
+              </div>
+              <div class="form-group">
+                <label for="client-need">Kebutuhan Produk</label>
+                <select id="client-need">
+                  <option value="sid">Sistem Informasi Desa (SID)</option>
+                  <option value="absensi">Absensi Online Perangkat</option>
+                  <option value="surat">Sistem Surat Menyurat</option>
+                  <option value="pbb">Sistem Pengelolaan PBB</option>
+                  <option value="custom">Solusi Custom Lainnya</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-primary form-submit-btn">
+                <span>Kirim via WhatsApp</span>
+                <i data-lucide="send"></i>
+              </button>
+            </form>
+            <div class="wa-direct-shortcut">
+              <span>Atau chat langsung ke admin:</span>
+              <a href="https://wa.me/6281211223344?text=Halo%20PT%20FAS%20Technology%20Solutions,%20saya%20tertarik%20dengan%20produk%20digitalisasi%20desa." target="_blank" rel="noopener noreferrer" class="wa-shortcut-btn">
+                <i data-lucide="message-square"></i> Hubungi via WhatsApp Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="glass-footer">
+      <div class="footer-bottom">
+        <p>&copy; 2026 PT FAS Technology Solutions. Hak Cipta Dilindungi Undang-Undang.</p>
+        <span class="footer-meta">Malingping, Lebak, Banten, Indonesia</span>
+      </div>
+    </footer>
+  </main>
+
+  <!-- PRODUCT DETAIL MODALS (GLASS OVERLAY) -->
+  <div id="product-modal" class="modal-overlay">
+    <div class="modal-card glass-card">
+      <button class="modal-close" id="modal-close-btn">
+        <i data-lucide="x"></i>
+      </button>
+      
+      <!-- SID DETAIL -->
+      <div id="sid-detail" class="modal-detail-content active-detail">
+        <div class="detail-icon bg-blue"><i data-lucide="globe"></i></div>
+        <h3>Sistem Informasi Desa (SID)</h3>
+        <p class="detail-subtitle">Satu data desa terpadu untuk mempermudah pemetaan warga, potensi, dan pelayanan administrasi yang cepat kilat.</p>
+        <div class="detail-sections">
+          <h4>Fitur Unggulan</h4>
+          <ul>
+            <li><strong>Pelayanan Mandiri:</strong> Warga dapat mengajukan permohonan surat melalui aplikasi mobile warga atau anjungan digital.</li>
+            <li><strong>Grafik Statistik Realtime:</strong> Visualisasi kependudukan (usia, pekerjaan, pendidikan) otomatis dari data mentah.</li>
+            <li><strong>Transparansi Keuangan:</strong> Tampilkan realisasi Anggaran Pendapatan dan Belanja Desa (APBDes) langsung di website desa untuk menumbuhkan rasa percaya warga.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ABSENSI DETAIL -->
+      <div id="absensi-detail" class="modal-detail-content">
+        <div class="detail-icon bg-gold"><i data-lucide="smartphone"></i></div>
+        <h3>Absensi Online Perangkat Desa</h3>
+        <p class="detail-subtitle">Sistem presensi digital nirkertas untuk optimalkan disiplin jam kerja perangkat desa berbasis biometrik modern.</p>
+        <div class="detail-sections">
+          <h4>Fitur Unggulan</h4>
+          <ul>
+            <li><strong>Deteksi Anti-Fake GPS:</strong> Mendeteksi dan mencegah kecurangan mock location atau aplikasi fake GPS secara ketat.</li>
+            <li><strong>Liveness Detection:</strong> Deteksi wajah yang membutuhkan mata berkedip atau gerakan kepala ringan agar tidak dapat dicurangi dengan foto cetak.</li>
+            <li><strong>Rekap Kehadiran Otomatis:</strong> Memudahkan sekretaris desa menarik rekap data kehadiran bulanan instan sekali klik.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SURAT DETAIL -->
+      <div id="surat-detail" class="modal-detail-content">
+        <div class="detail-icon bg-blue-bright"><i data-lucide="mail"></i></div>
+        <h3>Sistem Surat Menyurat Desa</h3>
+        <p class="detail-subtitle">Ubah pelayanan pembuatan surat keterangan dari 20 menit menjadi kurang dari 1 menit saja.</p>
+        <div class="detail-sections">
+          <h4>Fitur Unggulan</h4>
+          <ul>
+            <li><strong>Template Surat Dinamis:</strong> Mendukung kustomisasi kop, isi, dan penutup surat sesuai aturan Permendagri terbaru.</li>
+            <li><strong>Tanda Tangan Elektronik (TTE):</strong> Integrasi penuh sertifikat digital Balai Sertifikasi Elektronik (BSrE) untuk legalitas hukum sah.</li>
+            <li><strong>Arsip Digital Otomatis:</strong> Semua surat keluar tersimpan rapi dalam cloud storage berkeamanan tinggi dengan indeks pencarian instan.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PBB DETAIL -->
+      <div id="pbb-detail" class="modal-detail-content">
+        <div class="detail-icon bg-cyan"><i data-lucide="receipt"></i></div>
+        <h3>Sistem Pengelolaan PBB Desa</h3>
+        <p class="detail-subtitle">Optimalisasi Pendapatan Asli Daerah (PAD) melalui manajemen penagihan PBB-P2 terstruktur.</p>
+        <div class="detail-sections">
+          <h4>Fitur Unggulan</h4>
+          <ul>
+            <li><strong>Status Pembayaran Terpusat:</strong> Pantau siapa saja wajib pajak yang sudah lunas dan yang menunggak secara realtime.</li>
+            <li><strong>Kolektor Mode Mobile:</strong> Memudahkan petugas penagih keliling meng-update pembayaran secara langsung di lapangan menggunakan smartphone.</li>
+            <li><strong>Rekonsiliasi Pajak Daerah:</strong> Integrasi pelaporan instan dengan Badan Keuangan Daerah (Bappenda) kabupaten.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="modal-footer-cta">
+        <a href="#contact" id="modal-cta-btn" class="btn-primary">Hubungi Kami Mengenai Produk Ini</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- OrbitControls -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <!-- GSAP for Smooth Camera Animating -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  
+  <!-- Main Logic JS -->
+  <script src="/js/main.js"></script>
+  
+  <script>
+    // Inisialisasi Lucide Icons
+    lucide.createIcons();
+    
+    // Quick Form to WA redirect link
+    const form = document.getElementById('quick-msg-form');
+    if(form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('client-name').value;
+        const phone = document.getElementById('client-phone').value;
+        const need = document.getElementById('client-need');
+        const needText = need.options[need.selectedIndex].text;
+        
+        const message = `Halo PT FAS Technology Solutions, saya *${name}* (No: ${phone}) tertarik dengan produk *${needText}*. Mohon informasi dan presentasi lebih lanjut.`;
+        const encoded = encodeURIComponent(message);
+        window.open(`https://wa.me/6281211223344?text=${encoded}`, '_blank');
+      });
+    }
+  </script>
+</body>
+</html>

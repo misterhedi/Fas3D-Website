@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Base custom styles */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #050b14;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease;
+}
+
+/* Light / Dark variable presets */
+.dark-theme {
+  --bg-color: #050b14;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.75);
+}
+
+.light-theme {
+  --bg-color: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: rgba(15, 23, 42, 0.75);
+}
+
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050b14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e6bb8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c9a84c;
+}
+
+/* Pointer Events Helpers for overlay layouts */
+main {
+  pointer-events: none;
+}
+
+main > * {
+  pointer-events: auto;
+}
