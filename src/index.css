@@ -53,9 +53,5 @@ body {
 
 /* Pointer Events Helpers for overlay layouts */
 main {
-  pointer-events: none;
-}
-
-main > * {
   pointer-events: auto;
 }

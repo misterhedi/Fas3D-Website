@@ -43,6 +43,11 @@ export default function ResellerDashboard({ token, user, onLogout, onRefreshMe }
   const [genVillage, setGenVillage] = useState("Malingping Utara");
   const [generatedLink, setGeneratedLink] = useState("");
 
+  // Commission simulator states
+  const [simStandardCount, setSimStandardCount] = useState(1);
+  const [simPremiumCount, setSimPremiumCount] = useState(0);
+  const [simEnterpriseCount, setSimEnterpriseCount] = useState(0);
+
   useEffect(() => {
     fetchClients();
     fetchWithdrawals();
@@ -210,6 +215,32 @@ export default function ResellerDashboard({ token, user, onLogout, onRefreshMe }
           <div className="p-3 bg-emerald-500/10 rounded-xl text-emerald-400">
             <TrendingUp size={20} />
           </div>
+        </div>
+      </div>
+
+      {/* Target & Lencana Pencapaian Reseller */}
+      <div className="bg-[#1e293b]/30 border border-white/5 rounded-3xl p-5 flex flex-col sm:flex-row items-center gap-4">
+        <span className="p-4 bg-[#c9a84c]/10 text-[#c9a84c] rounded-2xl border border-[#c9a84c]/20">
+          <Trophy size={28} />
+        </span>
+        <div className="space-y-1 text-center sm:text-left flex-grow">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider">Lencana Tingkat Kemitraan Anda:</h4>
+            <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-extrabold border uppercase tracking-widest inline-block mx-auto sm:mx-0 ${
+              (user?.balance || 0) <= 1000000 ? "bg-amber-700/10 text-amber-500 border-amber-500/20" :
+              (user?.balance || 0) <= 5000000 ? "bg-slate-300/10 text-slate-300 border-slate-300/20 animate-pulse" :
+              "bg-yellow-400/10 text-yellow-400 border-yellow-400/25 animate-bounce"
+            }`}>
+              {(user?.balance || 0) <= 1000000 ? "🥉 Rookie Reseller (Perunggu)" :
+               (user?.balance || 0) <= 5000000 ? "🥈 Silver Agent (Perak)" :
+               "👑 Golden Ambassador (Emas)"}
+            </span>
+          </div>
+          <p className="text-[11px] text-gray-400 leading-normal">
+            {(user?.balance || 0) <= 1000000 ? "Tingkatkan saldo dompet komisi Anda melewati Rp 1.000.000 untuk naik peringkat menjadi Silver Agent dengan benefit eksklusif." :
+             (user?.balance || 0) <= 5000000 ? "Satu langkah lagi menuju peringkat tertinggi Golden Ambassador! Tingkatkan saldo komisi Anda melewati Rp 5.000.000." :
+             "Selamat! Anda berada di kasta tertinggi kemitraan PT FAS. Anda berhak mendapatkan jalur prioritas pencairan dana instan."}
+          </p>
         </div>
       </div>
 
@@ -404,43 +435,128 @@ export default function ResellerDashboard({ token, user, onLogout, onRefreshMe }
 
       {/* ================= AFFILIATE LINK GENERATOR ================= */}
       {activeTab === "links" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white/5 border border-white/5 rounded-2xl p-6 space-y-4">
-            <span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Bangun Link Afiliasi Desa</span>
-            <p className="text-xs text-gray-400 leading-normal">
-              Masukkan nama desa sasaran prospek Anda di bawah ini untuk membuat link landing page PT FAS dengan rujukan ID reseller Anda. Saat kades menyelesaikan checkout, komisi Anda 10% otomatis tercatat!
-            </p>
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white/5 border border-white/5 rounded-2xl p-6 space-y-4">
+              <span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Bangun Link Afiliasi Desa</span>
+              <p className="text-xs text-gray-400 leading-normal">
+                Masukkan nama desa sasaran prospek Anda di bawah ini untuk membuat link landing page PT FAS dengan rujukan ID reseller Anda. Saat kades menyelesaikan checkout, komisi Anda 10% otomatis tercatat!
+              </p>
 
-            <div className="space-y-3 text-xs">
-              <div>
-                <label className="block text-[9px] text-gray-400 mb-1">Nama Desa Sasaran Pitching</label>
-                <input
-                  type="text"
-                  value={genVillage}
-                  onChange={(e) => setGenVillage(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-white focus:outline-none"
-                />
+              <div className="space-y-3 text-xs">
+                <div>
+                  <label className="block text-[9px] text-gray-400 mb-1">Nama Desa Sasaran Pitching</label>
+                  <input
+                    type="text"
+                    value={genVillage}
+                    onChange={(e) => setGenVillage(e.target.value)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-white focus:outline-none"
+                  />
+                </div>
               </div>
+            </div>
+
+            <div className="bg-white/5 border border-[#c9a84c]/20 rounded-2xl p-6 flex flex-col justify-center gap-4">
+              <div className="space-y-1">
+                <span className="text-[9px] text-gray-400 uppercase font-bold tracking-wider block">Link Unik Anda Berhasil Dibuat</span>
+                <p className="text-xs font-mono bg-black/30 p-3 rounded-xl border border-white/5 text-gray-200 select-all break-all leading-normal">
+                  {generatedLink}
+                </p>
+              </div>
+
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(generatedLink);
+                  alert("Link afiliasi sukses disalin ke clipboard! Bagikan tautan ini ke kontak kades.");
+                }}
+                className="px-4 py-2.5 bg-[#c9a84c] hover:bg-[#b0913c] text-white text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all flex items-center justify-center gap-1.5"
+              >
+                <Link2 size={12} /> Salin Link Afiliasi
+              </button>
             </div>
           </div>
 
-          <div className="bg-white/5 border border-[#c9a84c]/20 rounded-2xl p-6 flex flex-col justify-center gap-4">
-            <div className="space-y-1">
-              <span className="text-[9px] text-gray-400 uppercase font-bold tracking-wider block">Link Unik Anda Berhasil Dibuat</span>
-              <p className="text-xs font-mono bg-black/30 p-3 rounded-xl border border-white/5 text-gray-200 select-all break-all leading-normal">
-                {generatedLink}
-              </p>
+          {/* Interactive Calculator Simulator */}
+          <div className="bg-[#1e293b]/30 border border-white/5 rounded-3xl p-6 space-y-4">
+            <div className="flex items-center gap-2 pb-2 border-b border-white/5">
+              <Trophy size={18} className="text-[#c9a84c]" />
+              <div>
+                <h4 className="text-xs font-bold text-white uppercase tracking-wider">Kalkulator Simulasi Target Komisi Agen</h4>
+                <p className="text-[10px] text-gray-400">Rencanakan target penutupan transaksi Anda dan hitung total potensi penghasilan pasif Anda langsung.</p>
+              </div>
             </div>
 
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText(generatedLink);
-                alert("Link afiliasi sukses disalin ke clipboard! Bagikan tautan ini ke kontak kades.");
-              }}
-              className="px-4 py-2.5 bg-[#c9a84c] hover:bg-[#b0913c] text-white text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all flex items-center justify-center gap-1.5"
-            >
-              <Link2 size={12} /> Salin Link Afiliasi
-            </button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+              <div className="space-y-3.5 text-xs">
+                {/* Standard Package Slider/Counter */}
+                <div className="flex items-center justify-between bg-white/5 p-3 rounded-2xl border border-white/5">
+                  <div>
+                    <span className="font-bold text-white text-[11px] block">Paket Standard (10%)</span>
+                    <span className="text-[10px] text-gray-400">Komisi: {formatRupiah(2500000)} per desa</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button 
+                      onClick={() => setSimStandardCount(Math.max(0, simStandardCount - 1))}
+                      className="w-7 h-7 bg-white/5 rounded-lg text-white hover:bg-white/10 font-mono font-bold text-sm"
+                    >-</button>
+                    <span className="w-8 text-center text-xs font-bold font-mono text-[#c9a84c]">{simStandardCount}</span>
+                    <button 
+                      onClick={() => setSimStandardCount(simStandardCount + 1)}
+                      className="w-7 h-7 bg-white/5 rounded-lg text-white hover:bg-white/10 font-mono font-bold text-sm"
+                    >+</button>
+                  </div>
+                </div>
+
+                {/* Professional Package Slider/Counter */}
+                <div className="flex items-center justify-between bg-white/5 p-3 rounded-2xl border border-white/5">
+                  <div>
+                    <span className="font-bold text-white text-[11px] block">Paket Professional (10%)</span>
+                    <span className="text-[10px] text-gray-400">Komisi: {formatRupiah(4500000)} per desa</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button 
+                      onClick={() => setSimPremiumCount(Math.max(0, simPremiumCount - 1))}
+                      className="w-7 h-7 bg-white/5 rounded-lg text-white hover:bg-white/10 font-mono font-bold text-sm"
+                    >-</button>
+                    <span className="w-8 text-center text-xs font-bold font-mono text-[#c9a84c]">{simPremiumCount}</span>
+                    <button 
+                      onClick={() => setSimPremiumCount(simPremiumCount + 1)}
+                      className="w-7 h-7 bg-white/5 rounded-lg text-white hover:bg-white/10 font-mono font-bold text-sm"
+                    >+</button>
+                  </div>
+                </div>
+
+                {/* Enterprise Package Slider/Counter */}
+                <div className="flex items-center justify-between bg-white/5 p-3 rounded-2xl border border-white/5">
+                  <div>
+                    <span className="font-bold text-white text-[11px] block">Paket Enterprise (10%)</span>
+                    <span className="text-[10px] text-gray-400">Komisi: {formatRupiah(7500000)} per desa</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button 
+                      onClick={() => setSimEnterpriseCount(Math.max(0, simEnterpriseCount - 1))}
+                      className="w-7 h-7 bg-white/5 rounded-lg text-white hover:bg-white/10 font-mono font-bold text-sm"
+                    >-</button>
+                    <span className="w-8 text-center text-xs font-bold font-mono text-[#c9a84c]">{simEnterpriseCount}</span>
+                    <button 
+                      onClick={() => setSimEnterpriseCount(simEnterpriseCount + 1)}
+                      className="w-7 h-7 bg-white/5 rounded-lg text-white hover:bg-white/10 font-mono font-bold text-sm"
+                    >+</button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Total Summary Block */}
+              <div className="bg-black/35 border border-white/5 rounded-3xl p-6 flex flex-col items-center justify-center text-center space-y-2 h-full py-8">
+                <span className="text-[9px] text-gray-400 font-extrabold uppercase tracking-widest block">Potensi Pendapatan Komisi Bersih Anda</span>
+                <div className="text-2xl font-black text-emerald-400 font-mono">
+                  {formatRupiah((simStandardCount * 2500000) + (simPremiumCount * 4500000) + (simEnterpriseCount * 7500000))}
+                </div>
+                <p className="text-[10px] text-gray-500 leading-normal max-w-xs">
+                  Selesaikan verifikasi kesepakatan dengan kepala desa. Komisi akan otomatis dicairkan ke saldo akun Anda begitu transaksi disahkan bendahara keuangan.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       )}

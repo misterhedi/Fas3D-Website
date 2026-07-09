@@ -41,6 +41,12 @@ export default function SuperAdminDashboard({ token, onLogout }: SuperAdminDashb
   const [sessionTimeout, setSessionTimeout] = useState(3600);
   const [backupFile, setBackupFile] = useState<any>(null);
 
+  // Pusat Kendali Operasional Real-time states
+  const [maintenanceMode, setMaintenanceMode] = useState(false);
+  const [publicRegEnabled, setPublicRegEnabled] = useState(true);
+  const [rateLimiterActive, setRateLimiterActive] = useState(true);
+  const [firewallShield, setFirewallShield] = useState(true);
+
   // Filters
   const [searchLog, setSearchLog] = useState("");
   const [roleLogFilter, setRoleLogFilter] = useState("ALL");
@@ -424,13 +430,117 @@ export default function SuperAdminDashboard({ token, onLogout }: SuperAdminDashb
 
       {/* ================= CONFIGURATION & BACKUP TAB ================= */}
       {activeTab === "settings" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* System Settings Form */}
-          <div className="bg-white/5 border border-white/5 rounded-2xl p-6 space-y-4">
-            <div className="flex items-center gap-2 text-white font-bold mb-2">
-              <Sliders size={18} className="text-[#c9a84c]" />
-              <span>Konfigurasi Konstanta Sistem</span>
+        <div className="space-y-6">
+          {/* Quick System Telemetry / Health & Control Panel */}
+          <div className="bg-[#1e293b]/30 border border-white/5 rounded-3xl p-6 space-y-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div>
+                <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                  <Sliders className="text-[#c9a84c]" size={16} /> Pusat Kendali Operasional & Keamanan (ISO 27001)
+                </h3>
+                <p className="text-[11px] text-gray-400">Kontrol langsung gerbang server, kebijakan registrasi, dan mode pemeliharaan sistem.</p>
+              </div>
+              <div className="flex items-center gap-3 bg-white/5 px-3 py-1.5 rounded-xl border border-white/5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                <span className="text-[10px] font-mono font-bold text-emerald-400">STATUS UTAMA: NORMAL & SECURE</span>
+              </div>
             </div>
+
+            {/* Simulated Live Gauges */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+              <div className="bg-black/20 p-3 rounded-2xl border border-white/5">
+                <span className="text-[9px] uppercase font-bold text-gray-400 block mb-1">Server Latency</span>
+                <span className="text-sm font-extrabold text-emerald-400 font-mono">4.2 ms</span>
+              </div>
+              <div className="bg-black/20 p-3 rounded-2xl border border-white/5">
+                <span className="text-[9px] uppercase font-bold text-gray-400 block mb-1">Uptime Server</span>
+                <span className="text-sm font-extrabold text-blue-400 font-mono">99.98%</span>
+              </div>
+              <div className="bg-black/20 p-3 rounded-2xl border border-white/5">
+                <span className="text-[9px] uppercase font-bold text-gray-400 block mb-1">Penggunaan CPU</span>
+                <span className="text-sm font-extrabold text-white font-mono">14.1%</span>
+              </div>
+              <div className="bg-black/20 p-3 rounded-2xl border border-white/5">
+                <span className="text-[9px] uppercase font-bold text-gray-400 block mb-1">Total Bandwidth</span>
+                <span className="text-sm font-extrabold text-[#c9a84c] font-mono">4.8 GB/s</span>
+              </div>
+            </div>
+
+            {/* Interactive Switch Controls */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+              <div className="bg-white/5 p-4 rounded-2xl border border-white/5 flex items-center justify-between transition-all hover:bg-white/10">
+                <div className="space-y-0.5 pr-2">
+                  <span className="text-[10px] font-bold text-white block">Maintenance Mode</span>
+                  <p className="text-[9px] text-gray-400 leading-tight">Batasi akses portal publik</p>
+                </div>
+                <button
+                  onClick={() => {
+                    setMaintenanceMode(!maintenanceMode);
+                    alert(`Maintenance Mode diubah menjadi: ${!maintenanceMode ? "AKTIF" : "NONAKTIF"}`);
+                  }}
+                  className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${maintenanceMode ? 'bg-[#c9a84c]' : 'bg-gray-700'}`}
+                >
+                  <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${maintenanceMode ? 'translate-x-5' : 'translate-x-0'}`} />
+                </button>
+              </div>
+
+              <div className="bg-white/5 p-4 rounded-2xl border border-white/5 flex items-center justify-between transition-all hover:bg-white/10">
+                <div className="space-y-0.5 pr-2">
+                  <span className="text-[10px] font-bold text-white block">Registrasi Mitra</span>
+                  <p className="text-[9px] text-gray-400 leading-tight">Buka pendaftaran reseller</p>
+                </div>
+                <button
+                  onClick={() => {
+                    setPublicRegEnabled(!publicRegEnabled);
+                    alert(`Pendaftaran Reseller diubah menjadi: ${!publicRegEnabled ? "DIIZINKAN" : "DITUTUP"}`);
+                  }}
+                  className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${publicRegEnabled ? 'bg-[#c9a84c]' : 'bg-gray-700'}`}
+                >
+                  <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${publicRegEnabled ? 'translate-x-5' : 'translate-x-0'}`} />
+                </button>
+              </div>
+
+              <div className="bg-white/5 p-4 rounded-2xl border border-white/5 flex items-center justify-between transition-all hover:bg-white/10">
+                <div className="space-y-0.5 pr-2">
+                  <span className="text-[10px] font-bold text-white block">API Rate Limiter</span>
+                  <p className="text-[9px] text-gray-400 leading-tight">Cegah serangan brute force</p>
+                </div>
+                <button
+                  onClick={() => {
+                    setRateLimiterActive(!rateLimiterActive);
+                    alert(`API Rate Limiter diubah menjadi: ${!rateLimiterActive ? "AKTIF" : "NONAKTIF"}`);
+                  }}
+                  className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${rateLimiterActive ? 'bg-[#c9a84c]' : 'bg-gray-700'}`}
+                >
+                  <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${rateLimiterActive ? 'translate-x-5' : 'translate-x-0'}`} />
+                </button>
+              </div>
+
+              <div className="bg-white/5 p-4 rounded-2xl border border-white/5 flex items-center justify-between transition-all hover:bg-white/10">
+                <div className="space-y-0.5 pr-2">
+                  <span className="text-[10px] font-bold text-white block">Perisai Firewall</span>
+                  <p className="text-[9px] text-gray-400 leading-tight">Blokir IP mencurigakan otomatis</p>
+                </div>
+                <button
+                  onClick={() => {
+                    setFirewallShield(!firewallShield);
+                    alert(`Firewall Shield diubah menjadi: ${!firewallShield ? "AKTIF (Ketat)" : "STANDAR"}`);
+                  }}
+                  className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${firewallShield ? 'bg-[#c9a84c]' : 'bg-gray-700'}`}
+                >
+                  <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${firewallShield ? 'translate-x-5' : 'translate-x-0'}`} />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* System Settings Form */}
+            <div className="bg-white/5 border border-white/5 rounded-2xl p-6 space-y-4">
+              <div className="flex items-center gap-2 text-white font-bold mb-2">
+                <Sliders size={18} className="text-[#c9a84c]" />
+                <span>Konfigurasi Konstanta Sistem</span>
+              </div>
 
             <div className="space-y-4 text-xs">
               <div>
@@ -505,6 +615,7 @@ export default function SuperAdminDashboard({ token, onLogout }: SuperAdminDashb
             </div>
           </div>
         </div>
+      </div>
       )}
 
       {/* User Save Modal */}

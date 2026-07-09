@@ -33,7 +33,6 @@ import {
   Lock,
   Heart,
 } from "lucide-react";
-import Scene3D from "./components/Scene3D";
 import CheckoutModal from "./components/CheckoutModal";
 import StatusChecker from "./components/StatusChecker";
 import AdminDashboard from "./components/AdminDashboard";
@@ -52,7 +51,6 @@ export default function App() {
   const [progress, setProgress] = useState(0);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [soundOn, setSoundOn] = useState(false);
-  const [cameraView, setCameraView] = useState("hero");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   // Interactive Overlays
@@ -250,29 +248,6 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  // Scroll spy to change cameraView dynamically
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ["hero", "about", "products", "testimonials", "pricing", "legal", "contact"];
-      let currentSection = "hero";
-
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-            currentSection = sectionId;
-            break;
-          }
-        }
-      }
-      setCameraView(currentSection);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   // Sync HTML class for theme
   useEffect(() => {
     const body = document.body;
@@ -430,7 +405,7 @@ export default function App() {
               <div className="absolute inset-0 border-4 border-white/5 border-t-[#1e6bb8] border-r-[#c9a84c] rounded-full animate-spin"></div>
             </div>
             <h2 className="text-xl font-bold text-white tracking-tight mb-2">PT FAS Technology Solutions</h2>
-            <p className="text-sm text-gray-400 mb-6">Menyiapkan Pengalaman 3D Interaktif...</p>
+            <p className="text-sm text-gray-400 mb-6">Menyiapkan Portal Digitalisasi Desa...</p>
             <div className="w-full h-[6px] bg-white/5 rounded-full overflow-hidden mb-3">
               <div
                 className="h-full bg-gradient-to-r from-[#1e6bb8] to-[#c9a84c] transition-all duration-300 rounded-full"
@@ -442,12 +417,24 @@ export default function App() {
         </div>
       )}
 
-      {/* 2. 3D WEBGL INTERACTIVE BACKGROUND */}
-      <Scene3D cameraView={cameraView} theme={theme} />
-
-      {/* Atmospheric glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-[#0b2b4a] rounded-full blur-[140px] opacity-40 pointer-events-none z-0"></div>
-      <div className="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] bg-[#1e6bb8] rounded-full blur-[120px] opacity-20 pointer-events-none z-0"></div>
+      {/* 2. PREMIUM LIGHTWEIGHT DECORATIVE BACKGROUND */}
+      <div className="fixed inset-0 w-full h-full pointer-events-none z-0">
+        <div className="absolute inset-0 bg-[#050b14] dark:bg-[#030712] transition-colors duration-500" />
+        
+        {/* Dynamic mesh digital grid pattern overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15]" 
+          style={{
+            backgroundImage: "radial-gradient(circle, rgba(201,168,76,0.15) 1px, transparent 1px)",
+            backgroundSize: "24px 24px"
+          }}
+        />
+        
+        {/* Glowing atmospheric spheres */}
+        <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-[#0b2b4a] rounded-full blur-[140px] opacity-45 pointer-events-none z-0"></div>
+        <div className="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] bg-[#1e6bb8]/15 rounded-full blur-[120px] opacity-25 pointer-events-none z-0"></div>
+        <div className="absolute top-[40%] right-[15%] w-[300px] h-[300px] bg-[#c9a84c]/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
+      </div>
 
       {/* 3. FLOAT / FIXED HUD & CONTROLS */}
       <div className="fixed top-24 right-6 z-50 flex flex-col gap-3 pointer-events-auto">
@@ -468,49 +455,10 @@ export default function App() {
           {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           <span className="text-[10px] uppercase tracking-wider font-bold hidden sm:inline">Tema</span>
         </button>
-
-        <button
-          onClick={() => setCameraView("hero")}
-          className="bg-[rgba(5,11,20,0.65)] hover:bg-[#1e6bb8] border border-white/10 text-white p-3 rounded-xl backdrop-blur-xl flex items-center gap-2 shadow-lg transition-all duration-300 transform hover:-translate-y-1"
-          title="Reset Sudut Kamera"
-        >
-          <RotateCcw size={16} />
-          <span className="text-[10px] uppercase tracking-wider font-bold hidden sm:inline">Reset 3D</span>
-        </button>
-      </div>
-
-      {/* 4. MAIN INTERACTIVE NAVIGATION HUD (BOTTOM LEFT) */}
-      <div className="fixed bottom-6 left-6 z-40 max-w-[280px] p-4 bg-[rgba(5,11,20,0.65)] border border-white/10 rounded-2xl backdrop-blur-xl shadow-2xl transition-all duration-300 hidden md:block">
-        <div className="text-[10px] font-extrabold tracking-widest text-[#c9a84c] mb-1 flex items-center gap-1.5 uppercase">
-          <Box size={12} /> PANEL NAVIGASI 3D
-        </div>
-        <p className="text-[10px] text-gray-400 leading-normal mb-3">
-          Gunakan mouse / sentuhan di latar belakang untuk memutar, memperbesar, dan mengeksplorasi model 3D FAS.
-        </p>
-        <div className="flex flex-col gap-1.5">
-          <button
-            onClick={() => setCameraView("front")}
-            className="w-full text-left text-[11px] font-semibold py-1.5 px-3 bg-white/5 hover:bg-[#1e6bb8] text-gray-300 hover:text-white rounded-lg transition-all duration-200"
-          >
-            Fokus Depan
-          </button>
-          <button
-            onClick={() => setCameraView("top")}
-            className="w-full text-left text-[11px] font-semibold py-1.5 px-3 bg-white/5 hover:bg-[#1e6bb8] text-gray-300 hover:text-white rounded-lg transition-all duration-200"
-          >
-            Fokus Atas
-          </button>
-          <button
-            onClick={() => setCameraView("particles")}
-            className="w-full text-left text-[11px] font-semibold py-1.5 px-3 bg-white/5 hover:bg-[#1e6bb8] text-gray-300 hover:text-white rounded-lg transition-all duration-200"
-          >
-            Mode Partikel Bintang
-          </button>
-        </div>
       </div>
 
       {/* 5. OVERLAY CONTENT WRAPPER */}
-      <main className="relative z-10 pointer-events-none w-full min-h-screen flex flex-col">
+      <main className="relative z-10 w-full min-h-screen flex flex-col">
         
         {/* HEADER / NAVBAR */}
         <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-6xl bg-[rgba(5,11,20,0.85)] border border-white/10 h-16 rounded-2xl px-6 flex justify-between items-center z-[100] shadow-2xl backdrop-blur-xl pointer-events-auto">
@@ -776,6 +724,7 @@ export default function App() {
                   id: "sid",
                   title: "Sistem Informasi Desa (SID)",
                   badge: "Terpopuler",
+                  availability: "Tersedia",
                   icon: Globe,
                   iconColor: "bg-[#1e6bb8]",
                   desc: "Platform digital terintegrasi untuk pengelolaan administrasi, pelayanan publik, kependudukan, dan transparansi anggaran desa secara online.",
@@ -785,6 +734,7 @@ export default function App() {
                   id: "absensi",
                   title: "Absensi Online Perangkat",
                   badge: "Inovatif",
+                  availability: "Tersedia",
                   icon: Smartphone,
                   iconColor: "bg-[#c9a84c]",
                   desc: "Sistem pencatatan kehadiran berbasis lokasi (GPS) dan pengenalan wajah untuk perangkat desa guna meningkatkan kedisiplinan dan kinerja harian.",
@@ -794,6 +744,7 @@ export default function App() {
                   id: "surat",
                   title: "Sistem Surat Menyurat",
                   badge: "Efisien",
+                  availability: "Tersedia",
                   icon: Mail,
                   iconColor: "bg-[#3b82f6]",
                   desc: "Digitalisasi birokrasi surat-menyurat dengan template otomatis, tanda tangan digital (TTE), serta pelacakan status permohonan surat secara real-time.",
@@ -803,6 +754,7 @@ export default function App() {
                   id: "pbb",
                   title: "Sistem Pengelolaan PBB",
                   badge: "Akuntabel",
+                  availability: "Maintenance",
                   icon: Receipt,
                   iconColor: "bg-[#06b6d4]",
                   desc: "Solusi pelacakan tagihan, penagihan kolektif, dan pelaporan realisasi Pajak Bumi dan Bangunan (PBB) tingkat desa secara presisi, akurat, dan transparan.",
@@ -819,9 +771,19 @@ export default function App() {
                       <div className={`w-12 h-12 rounded-xl flex justify-center items-center text-white ${p.iconColor}`}>
                         <IconComponent size={22} />
                       </div>
-                      <span className="font-mono text-[9px] uppercase tracking-wider font-bold bg-white/5 border border-white/10 text-gray-300 px-2.5 py-1 rounded-lg">
-                        {p.badge}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className={`font-mono text-[8px] uppercase tracking-wider font-extrabold px-2 py-1 rounded-lg border flex items-center gap-1 ${
+                          p.availability === "Maintenance"
+                            ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
+                            : "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                        }`}>
+                          <span className={`w-1 h-1 rounded-full ${p.availability === "Maintenance" ? "bg-amber-400 animate-pulse" : "bg-emerald-400"}`}></span>
+                          {p.availability}
+                        </span>
+                        <span className="font-mono text-[9px] uppercase tracking-wider font-bold bg-white/5 border border-white/10 text-gray-300 px-2.5 py-1 rounded-lg">
+                          {p.badge}
+                        </span>
+                      </div>
                     </div>
 
                     <h3 className="text-lg font-bold mb-2 tracking-tight">{p.title}</h3>

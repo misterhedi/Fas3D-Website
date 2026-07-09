@@ -25,6 +25,7 @@ export default function TreasurerDashboard({ token, onLogout }: TreasurerDashboa
   
   // zoom proof slip modal
   const [zoomedSlip, setZoomedSlip] = useState<string | null>(null);
+  const [selectedInvoice, setSelectedInvoice] = useState<any | null>(null);
 
   useEffect(() => {
     fetchTransactions();
@@ -174,6 +175,35 @@ export default function TreasurerDashboard({ token, onLogout }: TreasurerDashboa
         </div>
       </div>
 
+      {/* Target & Capaian Pendapatan Bulanan */}
+      <div className="bg-[#1e293b]/30 border border-white/5 rounded-3xl p-5 space-y-3">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <div>
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider">Target & Capaian Pendapatan Kuartal III</h4>
+            <p className="text-[10px] text-gray-400">Akumulasi target omset penjualan sistem desa digital PT FAS.</p>
+          </div>
+          <div className="text-right">
+            <span className="text-[11px] text-gray-300 font-medium">Progress: </span>
+            <span className="text-xs font-mono font-bold text-emerald-400">{Math.min(100, Math.round((totalIncome / 120000000) * 100))}%</span>
+            <span className="text-[10px] text-gray-500 font-mono"> (Goal: Rp 120.000.000)</span>
+          </div>
+        </div>
+        
+        {/* Progress Bar */}
+        <div className="w-full bg-white/5 rounded-full h-3.5 overflow-hidden p-0.5 border border-white/10">
+          <div 
+            style={{ width: `${Math.max(4, Math.min(100, Math.round((totalIncome / 120000000) * 100)))}%` }}
+            className="h-full bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-full transition-all duration-500"
+          ></div>
+        </div>
+
+        <div className="flex justify-between items-center text-[9px] font-bold text-gray-400 uppercase tracking-widest pt-1">
+          <span>Sangat Awal</span>
+          <span>Desa Mandiri 50%</span>
+          <span>Target Terlampaui 100%</span>
+        </div>
+      </div>
+
       {/* Tabs */}
       <div className="flex gap-2 border-b border-white/5 pb-1">
         <button
@@ -282,7 +312,16 @@ export default function TreasurerDashboard({ token, onLogout }: TreasurerDashboa
                     </td>
                     <td className="p-4">
                       <div className="font-semibold text-white">{t.customerName}</div>
-                      <span className="text-[10px] text-gray-400">{t.customerVillage}</span>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <span className="text-[10px] text-gray-400">{t.customerVillage}</span>
+                        <span className="text-gray-600">•</span>
+                        <button
+                          onClick={() => setSelectedInvoice(t)}
+                          className="text-[9px] font-bold text-[#c9a84c] uppercase hover:underline"
+                        >
+                          Cetak Invoice
+                        </button>
+                      </div>
                     </td>
                     <td className="p-4 text-gray-300 font-medium">
                       {t.packageName} ({formatRupiah(t.amount)})
@@ -336,6 +375,88 @@ export default function TreasurerDashboard({ token, onLogout }: TreasurerDashboa
             />
           </div>
           <span className="text-gray-400 text-xs font-semibold mt-3 uppercase tracking-wider">Berkas Bukti Transfer Bank (Slip Resi)</span>
+        </div>
+      )}
+
+      {/* Selected Invoice Viewer Modal */}
+      {selectedInvoice && (
+        <div className="fixed inset-0 z-[1300] w-full h-full bg-black/90 flex justify-center items-center p-4 backdrop-blur-sm">
+          <div className="bg-[#0b1322] border border-white/10 w-full max-w-lg rounded-3xl p-6 relative shadow-2xl space-y-5">
+            <div className="flex justify-between items-center pb-2 border-b border-white/5">
+              <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                <FileText size={16} className="text-[#c9a84c]" /> Detail Invoice & Kwitansi Resmi
+              </h3>
+              <button onClick={() => setSelectedInvoice(null)} className="text-gray-400 hover:text-white transition-colors">
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Simulated Printed Invoice Card */}
+            <div className="bg-white text-gray-800 p-6 rounded-2xl shadow-inner space-y-4 text-xs select-none">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h4 className="font-extrabold text-sm text-gray-900 tracking-tight uppercase">PT FAS Solusi Teknologi</h4>
+                  <p className="text-[9px] text-gray-500 leading-normal">
+                    Transformasi Digital & Sistem Desa Pintar<br />
+                    Lebak, Banten, Indonesia
+                  </p>
+                </div>
+                <div className="text-right">
+                  <span className="px-2 py-0.5 rounded text-[8px] font-extrabold uppercase bg-emerald-100 text-emerald-800 tracking-wider">
+                    {selectedInvoice.status}
+                  </span>
+                  <div className="text-[10px] font-mono font-bold mt-1.5 text-gray-900">#INV-{selectedInvoice.orderId.substring(0, 8).toUpperCase()}</div>
+                </div>
+              </div>
+
+              <div className="border-t border-b border-gray-200 py-3 grid grid-cols-2 gap-4 text-[10px]">
+                <div>
+                  <span className="text-[8px] font-bold text-gray-400 uppercase tracking-wider block">Ditagihkan Kepada:</span>
+                  <strong className="text-gray-900 block mt-0.5">{selectedInvoice.customerName}</strong>
+                  <span className="text-gray-600 block">{selectedInvoice.customerVillage || "Umum"}</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-[8px] font-bold text-gray-400 uppercase tracking-wider block">Tanggal Terbit:</span>
+                  <span className="text-gray-900 font-mono block mt-0.5">{new Date(selectedInvoice.createdAt).toLocaleDateString("id-ID")}</span>
+                  <span className="text-gray-500 block">Metode: {selectedInvoice.paymentMethod}</span>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex justify-between text-gray-500 text-[9px] font-bold uppercase tracking-wider border-b border-gray-100 pb-1">
+                  <span>Deskripsi Paket Layanan</span>
+                  <span>Total Harga</span>
+                </div>
+                <div className="flex justify-between items-center text-xs font-semibold text-gray-900">
+                  <div>
+                    <span>{selectedInvoice.packageName}</span>
+                    <p className="text-[8px] text-gray-500 font-normal">Sistem Lisensi & Integrasi Cloud Desa PT FAS</p>
+                  </div>
+                  <span className="font-mono">{formatRupiah(selectedInvoice.amount)}</span>
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-gray-200 flex justify-between items-center">
+                <span className="text-[10px] font-bold text-gray-900 uppercase">Jumlah Total Terbayar:</span>
+                <span className="text-sm font-extrabold text-emerald-600 font-mono">{formatRupiah(selectedInvoice.amount)}</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 pt-1">
+              <button
+                onClick={() => alert("Kwitansi resmi berhasil diunduh dalam format PDF (Simulated).")}
+                className="py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 border border-white/5"
+              >
+                <Download size={12} /> Unduh PDF
+              </button>
+              <button
+                onClick={() => alert(`Kwitansi pembayaran telah dikirimkan secara otomatis via WhatsApp (Simulasi) ke nomor klien.`)}
+                className="py-2.5 bg-[#c9a84c] hover:bg-[#b0913c] text-white rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5"
+              >
+                Kirim WhatsApp
+              </button>
+            </div>
+          </div>
         </div>
       )}
 

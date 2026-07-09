@@ -10,7 +10,8 @@ import {
   Image,
   Upload,
   Check,
-  X
+  X,
+  Sparkles
 } from "lucide-react";
 
 interface EditorDashboardProps {
@@ -35,6 +36,19 @@ export default function EditorDashboard({ token, onLogout }: EditorDashboardProp
   const [artSeoTitle, setArtSeoTitle] = useState("");
   const [artSeoDesc, setArtSeoDesc] = useState("");
   const [artSeoKeywords, setArtSeoKeywords] = useState("");
+
+  const handleAutoFillSEO = () => {
+    if (!artTitle) {
+      alert("Silakan isi judul artikel terlebih dahulu!");
+      return;
+    }
+    setArtSeoTitle(`${artTitle} | PT FAS Digitalisasi`);
+    setArtSeoDesc(artContent 
+      ? artContent.substring(0, 150) + "..." 
+      : `Baca berita selengkapnya mengenai ${artTitle} di portal resmi transformasi digital PT FAS.`);
+    setArtSeoKeywords(`${artCategory.toLowerCase()}, ${artTags || "portal desa, teknologi"}`);
+    alert("Metadata SEO berhasil dioptimasi secara otomatis!");
+  };
 
   // Static pages state
   const [pageTentang, setPageTentang] = useState("");
@@ -491,7 +505,16 @@ export default function EditorDashboard({ token, onLogout }: EditorDashboardProp
 
               {/* SEO PANEL */}
               <div className="border border-white/5 rounded-2xl p-4 bg-black/15 space-y-3">
-                <span className="text-[10px] text-gray-300 font-bold block uppercase">Optimasi Mesin Pencari (SEO Metadata)</span>
+                <div className="flex justify-between items-center pb-2 border-b border-white/5">
+                  <span className="text-[10px] text-gray-300 font-bold block uppercase">Optimasi Mesin Pencari (SEO Metadata)</span>
+                  <button
+                    type="button"
+                    onClick={handleAutoFillSEO}
+                    className="px-2 py-1 bg-[#c9a84c]/20 hover:bg-[#c9a84c]/35 text-[#c9a84c] rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all"
+                  >
+                    <Sparkles size={10} /> Auto-Generate SEO
+                  </button>
+                </div>
                 
                 <div>
                   <label className="block text-[8px] text-gray-400 uppercase mb-1">SEO Title Tag</label>

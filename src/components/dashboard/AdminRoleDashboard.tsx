@@ -23,6 +23,10 @@ export default function AdminRoleDashboard({ token, onLogout }: AdminRoleDashboa
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"users" | "resellers">("users");
 
+  // Search and filter states
+  const [searchTerm, setSearchTerm] = useState("");
+  const [roleFilter, setRoleFilter] = useState("ALL");
+
   // User save form
   const [showUserModal, setShowUserModal] = useState(false);
   const [isEditingUser, setIsEditingUser] = useState<string | null>(null);
@@ -110,6 +114,16 @@ export default function AdminRoleDashboard({ token, onLogout }: AdminRoleDashboa
   };
 
   const resellers = users.filter((u) => u.role === "reseller");
+  const staffUsers = users.filter((u) => u.role !== "reseller" && u.role !== "super_admin");
+  const activeResellers = resellers.filter((u) => u.status === "active");
+  const pendingResellers = resellers.filter((u) => u.status === "pending_approval" || u.status === "suspended");
+
+  // Filtering users list based on search and role filter
+  const filteredUsers = users.filter((u) => {
+    const matchesSearch = u.name.toLowerCase().includes(searchTerm.toLowerCase()) || u.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesRole = roleFilter === "ALL" || u.role === roleFilter;
+    return matchesSearch && matchesRole;
+  });
 
   return (
     <div className="space-y-6">
@@ -137,6 +151,37 @@ export default function AdminRoleDashboard({ token, onLogout }: AdminRoleDashboa
         </div>
       </div>
 
+      {/* KPI Summary Widget */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="bg-[#1e293b]/20 border border-white/5 rounded-2xl p-4 flex justify-between items-center">
+          <div>
+            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Total Staff Internal</span>
+            <div className="text-xl font-extrabold text-white font-mono mt-0.5">{staffUsers.length} Orang</div>
+          </div>
+          <span className="p-2.5 bg-purple-500/10 text-purple-400 rounded-xl">
+            <Users size={16} />
+          </span>
+        </div>
+        <div className="bg-[#1e293b]/20 border border-white/5 rounded-2xl p-4 flex justify-between items-center">
+          <div>
+            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Mitra Reseller Aktif</span>
+            <div className="text-xl font-extrabold text-emerald-400 font-mono mt-0.5">{activeResellers.length} Agen</div>
+          </div>
+          <span className="p-2.5 bg-emerald-500/10 text-emerald-400 rounded-xl">
+            <ShieldCheck size={16} />
+          </span>
+        </div>
+        <div className="bg-[#1e293b]/20 border border-white/5 rounded-2xl p-4 flex justify-between items-center">
+          <div>
+            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wide">Menunggu Persetujuan</span>
+            <div className="text-xl font-extrabold text-yellow-400 font-mono mt-0.5">{pendingResellers.length} Prospek</div>
+          </div>
+          <span className="p-2.5 bg-yellow-500/10 text-yellow-400 rounded-xl">
+            <TrendingUp size={16} />
+          </span>
+        </div>
+      </div>
+
       {/* Tabs Menu */}
       <div className="flex gap-2 border-b border-white/5 pb-1">
         <button
@@ -160,22 +205,45 @@ export default function AdminRoleDashboard({ token, onLogout }: AdminRoleDashboa
       {/* ================= TAB 1: USERS CRUD ================= */}
       {activeTab === "users" && (
         <div className="space-y-4">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <span className="text-xs text-gray-400">Total terdaftar (selain super admin): <b className="text-white">{users.length} user</b></span>
-            <button
-              onClick={() => {
-                setIsEditingUser(null);
-                setUserName("");
-                setUserEmail("");
-                setUserRole("reseller");
-                setUserStatus("active");
-                setUserPassword("");
-                setShowUserModal(true);
-              }}
-              className="px-3.5 py-2 bg-[#c9a84c] hover:bg-[#b0913c] text-white text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all flex items-center gap-1"
-            >
-              <Plus size={12} /> Tambah Staff Baru
-            </button>
+            
+            {/* Search and Filters */}
+            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+              <input
+                type="text"
+                placeholder="Cari nama / email..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="bg-white/5 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#c9a84c] w-full sm:w-48 font-semibold"
+              />
+              <select
+                value={roleFilter}
+                onChange={(e) => setRoleFilter(e.target.value)}
+                className="bg-white/5 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#c9a84c]"
+              >
+                <option value="ALL" className="bg-[#0b1322]">Semua Peran</option>
+                <option value="admin" className="bg-[#0b1322]">Admin</option>
+                <option value="editor" className="bg-[#0b1322]">Editor</option>
+                <option value="bendahara" className="bg-[#0b1322]">Bendahara</option>
+                <option value="sekretaris" className="bg-[#0b1322]">Sekretaris</option>
+                <option value="reseller" className="bg-[#0b1322]">Reseller</option>
+              </select>
+              <button
+                onClick={() => {
+                  setIsEditingUser(null);
+                  setUserName("");
+                  setUserEmail("");
+                  setUserRole("reseller");
+                  setUserStatus("active");
+                  setUserPassword("");
+                  setShowUserModal(true);
+                }}
+                className="px-3.5 py-2 bg-[#c9a84c] hover:bg-[#b0913c] text-white text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all flex items-center gap-1 w-full sm:w-auto justify-center"
+              >
+                <Plus size={12} /> Tambah Staff Baru
+              </button>
+            </div>
           </div>
 
           <div className="overflow-x-auto rounded-2xl border border-white/5 bg-black/20">
@@ -190,7 +258,7 @@ export default function AdminRoleDashboard({ token, onLogout }: AdminRoleDashboa
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
-                {users.map((u) => (
+                {filteredUsers.map((u) => (
                   <tr key={u.id} className="hover:bg-white/5 transition-colors">
                     <td className="p-4 font-semibold text-white">{u.name}</td>
                     <td className="p-4 font-mono text-gray-300">{u.email}</td>

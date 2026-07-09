@@ -249,10 +249,25 @@ export default function CatalogModal({
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0b1322] to-transparent"></div>
                       
-                      {/* Floating Category Badge */}
-                      <span className={`absolute top-4 left-4 text-[8px] font-extrabold uppercase px-2 py-1 rounded-md tracking-wider ${getCategoryColor(p.category)}`}>
-                        {p.category}
-                      </span>
+                      {/* Floating Badges */}
+                      <div className="absolute top-4 left-4 flex flex-wrap gap-1.5 items-center max-w-[70%]">
+                        <span className={`text-[8px] font-extrabold uppercase px-2 py-1 rounded-md tracking-wider ${getCategoryColor(p.category)}`}>
+                          {p.category.replace("PRODUK ", "")}
+                        </span>
+                        {(() => {
+                          const isMaintenance = ["prod-web-08", "prod-soft-06", "prod-sub-05", "prod-jasa-04", "prod-dig-03", "prod-host-04"].includes(p.id);
+                          return (
+                            <span className={`text-[8px] font-extrabold uppercase px-2 py-1 rounded-md tracking-wider border flex items-center gap-1 backdrop-blur-md ${
+                              isMaintenance
+                                ? "bg-amber-500/20 text-amber-300 border-amber-500/30"
+                                : "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
+                            }`}>
+                              <span className={`w-1.5 h-1.5 rounded-full ${isMaintenance ? "bg-amber-400 animate-pulse" : "bg-emerald-400"}`}></span>
+                              {isMaintenance ? "Maintenance" : "Tersedia"}
+                            </span>
+                          );
+                        })()}
+                      </div>
 
                       {/* Wishlist Icon Button */}
                       <button
